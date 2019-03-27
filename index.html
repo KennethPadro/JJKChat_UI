@@ -1,43 +1,56 @@
-<html lang="en" >
+<!DOCTYPE html>
+<html lang="en" ng-app="AppChat">
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Angular Material style sheet -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.css">
+    <meta charset="UTF-8">
+    <title>App Chat</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <!-- 	<link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>-->
+
+    <!-- Materialize -->
+    <link href="css/materialize.css" rel="stylesheet">
+    <script src="js/materialize.js"></script>
+    <!-- AngularJS -->
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-route/angular-route.js"></script>
+    <script src="node_modules/ngstorage/ngStorage.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
-<body ng-app="BlankApp" ng-cloak>
-<!--
-  Your HTML content here
--->
-<md-toolbar>
-    <h1>JJKChat</h1>
-</md-toolbar>
-<md-sidenav></md-sidenav>
 
-<!-- Angular Material requires Angular.js Libraries -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-messages.min.js"></script>
+<body>
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">JJKChat</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#">Login</a></li>
+        </ul>
 
-<!-- Angular Material Library -->
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.js"></script>
+        <ul id="nav-mobile" class="sidenav">
+            <li><a href="#">Navbar Link</a></li>
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+    <center>
+        <h2></h2>
+    </center>
+    <ng-view>
+    </ng-view>
+    <script type="text/javascript" src="appjs/main.js"></script>
+    <script type="text/javascript" src="appjs/chat.js"></script>
+    <script type="text/javascript" src="appjs/reactdetails.js"></script>
+    <script type="text/javascript" src="appjs/chatgroups.js"></script>
+    <script type="text/javascript" src="appjs/register.js"></script>
+    <script type="text/javascript" src="appjs/login.js"></script>
+    <script type="text/javascript" src="appjs/reply.js"></script>
+    <script type="text/javascript" src="appjs/allgroups.js"></script>
+    <script type="text/javascript" src="appjs/allposts.js"></script>
 
-<!-- Your application bootstrap  -->
-<script type="text/javascript">
-    /**
-     * You must include the dependency on 'ngMaterial'
-     */
-    angular.module('BlankApp', ['ngMaterial', 'ngMessages'])
-        .run(function () {
-            console.log('Works')
-
-        });
-</script>
 
 </body>
-</html>
 
-<!--
-Copyright 2016-2019 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that can be found in the LICENSE file at https://material.angularjs.org/latest/license.
--->
+</html>
