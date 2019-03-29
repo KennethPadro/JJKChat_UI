@@ -9,7 +9,7 @@ function ($http, $log, $scope, $location, $route, $routeParams, $localStorage) {
         // Get the list of parts from the servers via REST API
 
         // First set up the url for the route
-        var url = "https://jjkchat-api.herokuapp.com/JJKChat/groups";
+        var url = "http://127.0.0.1:5000/JJKChat/groups";
 
         // Now set up the $http object
         // It has two function call backs, one for success and one for error
@@ -56,7 +56,7 @@ function ($http, $log, $scope, $location, $route, $routeParams, $localStorage) {
         $location.url('/chat/' + gID);
     }
     this.join = function (gID) {
-        var url = "https://db-chatapp-papaya.herokuapp.com/ChatApp/group/" + gID + "/person/" + thisCtrl.pID;
+        var url = "http://127.0.0.1:5000/JJKChat/ChatApp/group/" + gID + "/person/" + thisCtrl.pID;
         
                 // Now set up the $http object
                 // It has two function call backs, one for success and one for error

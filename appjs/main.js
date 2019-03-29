@@ -37,7 +37,7 @@
             controller: 'AllPostsController',
             controllerAs: 'allPostsCtrl'
         }).otherwise({
-            redirectTo: '/allGroups'
+            redirectTo: '/login'
         });
     }]);
 
