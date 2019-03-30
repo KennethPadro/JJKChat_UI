@@ -9,7 +9,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
             // Get the list of parts from the servers via REST API
 
             // First set up the url for the route
-            var url = "URLLLL/ChatApp/person/" + thisCtrl.pID + "/group";
+            var url = "http://127.0.0.1:5000/JJKChat/users/"+ thisCtrl.pID + "/member";
 
             // Now set up the $http object
             // It has two function call backs, one for success and one for error
@@ -21,7 +21,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
 
                     console.log("response: " + JSON.stringify(response));
 
-                    thisCtrl.groupList = response.data.Group;
+                    thisCtrl.groupList = response.data;
                     console.log(thisCtrl.groupList)
 
                 }, // error callback

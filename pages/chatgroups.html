@@ -23,12 +23,12 @@
                     <div class="card">
                         <div class="card-content">
                             <!-- Card Title is the person who write the message -->
-                            <span class="card-title">{{g.gName}}</span>
+                            <span class="card-title">{{g.chat_name}}</span>
                             <!-- Here comes the message text -->
 
                         </div>
                         <div class="card-action white">
-                            <button class="btn waves-effect waves-light " type="submit" name="action" ng-click="groupsCtrl.enterGroup(g.gID)">Enter Group
+                            <button class="btn waves-effect waves-light " type="submit" name="action" ng-click="groupsCtrl.enterGroup(g.chat_group_id)">Enter Group
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
