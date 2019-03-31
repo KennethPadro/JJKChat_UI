@@ -11,43 +11,34 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.counter = 1000;
 
         this.loadMessages = function () {
-            // Get the list of parts from the servers via REST API
 
-            // First set up the url for the route
             var url = "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post";
 
-            // Now set up the $http object
-            // It has two function call backs, one for success and one for error
-            $http.get(url).then(// success call back
+
+            $http.get(url).then(
                 function (response) {
-                    // The is the sucess function!
-                    // Copy the list of parts in the data variable
-                    // into the list of parts in the controller.
 
                     console.log("response: " + JSON.stringify(response));
 
                     thisCtrl.messageList = response.data;
 
-                }, // error callback
+                },
                 function (response) {
-                    // This is the error function
-                    // If we get here, some error occurred.
-                    // Verify which was the cause and show an alert.
                     var status = response.status;
-                    if (status == 0) {
-                        alert("No hay conexion a Internet");
+                    if (status === 0) {
+                        alert("No internet connection");
                     }
-                    else if (status == 401) {
-                        alert("Su sesion expiro. Conectese de nuevo.");
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
                     }
-                    else if (status == 403) {
-                        alert("No esta autorizado a usar el sistema.");
+                    else if (status === 403) {
+                        alert("Not authorized");
                     }
-                    else if (status == 404) {
-                        alert("No se encontro la informacion solicitada.");
+                    else if (status === 404) {
+                        alert("Not found");
                     }
                     else {
-                        alert("Error interno del sistema.");
+                        alert("Internal error.");
                     }
                 });
 
@@ -81,29 +72,23 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
                 }, // error callback
                 function (response) {
-                    // This is the error function
-                    // If we get here, some error occurred.
-                    // Verify which was the cause and show an alert.
                     var status = response.status;
-                    if (status == 0) {
-                        alert("No hay conexion a Internet");
+                    if (status === 0) {
+                        alert("No internet connection");
                     }
-                    else if (status == 401) {
-                        alert("Su sesion expiro. Conectese de nuevo.");
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
                     }
-                    else if (status == 403) {
-                        alert("No esta autorizado a usar el sistema.");
+                    else if (status === 403) {
+                        alert("Not authorized");
                     }
-                    else if (status == 404) {
-                        alert("No se encontro la informacion solicitada.");
+                    else if (status === 404) {
+                        alert("Not found");
                     }
                     else {
-                        alert("Error interno del sistema.");
+                        alert("Internal error.");
                     }
-
-
-                }
-                );
+                });
             $route.reload()
 
 
@@ -113,41 +98,31 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.like = function (mID) {
             var url = "http://127.0.0.1:5000/JJKChat/ChatApp/like/message/" + mID + "/person/" + thisCtrl.pID;
 
-            // Now set up the $http object
-            // It has two function call backs, one for success and one for error
-            $http.post(url).then(// success call back
+            $http.post(url).then(
                 function (response) {
-                    // The is the sucess function!
-                    // Copy the list of parts in the data variable
-                    // into the list of parts in the controller.
+
 
                     console.log("response: " + JSON.stringify(response));
 
-                }, // error callback
+                },
                 function (response) {
-                    // This is the error function
-                    // If we get here, some error occurred.
-                    // Verify which was the cause and show an alert.
                     var status = response.status;
-                    if (status == 0) {
-                        alert("No hay conexion a Internet");
+                    if (status === 0) {
+                        alert("No internet connection");
                     }
-                    else if (status == 401) {
-                        alert("Su sesion expiro. Conectese de nuevo.");
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
                     }
-                    else if (status == 403) {
-                        alert("No esta autorizado a usar el sistema.");
+                    else if (status === 403) {
+                        alert("Not authorized");
                     }
-                    else if (status == 404) {
-                        alert("No se encontro la informacion solicitada.");
+                    else if (status === 404) {
+                        alert("Not found");
                     }
                     else {
-                        alert("Error interno del sistema.");
+                        alert("Internal error.");
                     }
-
-
-                }
-            );
+                });
             $route.reload()
         };
 
@@ -166,29 +141,23 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
                 }, // error callback
                 function (response) {
-                    // This is the error function
-                    // If we get here, some error occurred.
-                    // Verify which was the cause and show an alert.
                     var status = response.status;
-                    if (status == 0) {
-                        alert("No hay conexion a Internet");
+                    if (status === 0) {
+                        alert("No internet connection");
                     }
-                    else if (status == 401) {
-                        alert("Su sesion expiro. Conectese de nuevo.");
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
                     }
-                    else if (status == 403) {
-                        alert("No esta autorizado a usar el sistema.");
+                    else if (status === 403) {
+                        alert("Not authorized");
                     }
-                    else if (status == 404) {
-                        alert("No se encontro la informacion solicitada.");
+                    else if (status === 404) {
+                        alert("Not found");
                     }
                     else {
-                        alert("Error interno del sistema.");
+                        alert("Internal error.");
                     }
-
-
-                }
-            );
+                });
             $route.reload()
         };
 
@@ -209,24 +178,21 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
                 }, // error callback
                 function (response) {
-                    // This is the error function
-                    // If we get here, some error occurred.
-                    // Verify which was the cause and show an alert.
                     var status = response.status;
-                    if (status == 0) {
-                        alert("No hay conexion a Internet");
+                    if (status === 0) {
+                        alert("No internet connection");
                     }
-                    else if (status == 401) {
-                        alert("Su sesion expiro. Conectese de nuevo.");
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
                     }
-                    else if (status == 403) {
-                        alert("No esta autorizado a usar el sistema.");
+                    else if (status === 403) {
+                        alert("Not authorized");
                     }
-                    else if (status == 404) {
-                        alert("No se encontro la informacion solicitada.");
+                    else if (status === 404) {
+                        alert("Not found");
                     }
                     else {
-                        alert("Error interno del sistema.");
+                        alert("Internal error.");
                     }
                 });
 

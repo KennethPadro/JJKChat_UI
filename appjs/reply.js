@@ -24,24 +24,21 @@ angular.module('AppChat').controller('ReplyController', ['$http', '$log', '$scop
 
                 }, // error callback
                 function (response) {
-                    // This is the error function
-                    // If we get here, some error occurred.
-                    // Verify which was the cause and show an alert.
                     var status = response.status;
-                    if (status == 0) {
-                        alert("No hay conexion a Internet");
+                    if (status === 0) {
+                        alert("No internet connection");
                     }
-                    else if (status == 401) {
-                        alert("Su sesion expiro. Conectese de nuevo.");
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
                     }
-                    else if (status == 403) {
-                        alert("No esta autorizado a usar el sistema.");
+                    else if (status === 403) {
+                        alert("Not authorized");
                     }
-                    else if (status == 404) {
-                        alert("No se encontro la informacion solicitada.");
+                    else if (status === 404) {
+                        alert("Not found");
                     }
                     else {
-                        alert("Error interno del sistema.");
+                        alert("Internal error.");
                     }
                 });
 
@@ -73,29 +70,23 @@ angular.module('AppChat').controller('ReplyController', ['$http', '$log', '$scop
 
                 }, // error callback
                 function (response) {
-                    // This is the error function
-                    // If we get here, some error occurred.
-                    // Verify which was the cause and show an alert.
                     var status = response.status;
-                    if (status == 0) {
-                        alert("No hay conexion a Internet");
+                    if (status === 0) {
+                        alert("No internet connection");
                     }
-                    else if (status == 401) {
-                        alert("Su sesion expiro. Conectese de nuevo.");
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
                     }
-                    else if (status == 403) {
-                        alert("No esta autorizado a usar el sistema.");
+                    else if (status === 403) {
+                        alert("Not authorized");
                     }
-                    else if (status == 404) {
-                        alert("No se encontro la informacion solicitada.");
+                    else if (status === 404) {
+                        alert("Not found");
                     }
                     else {
-                        alert("Error interno del sistema.");
+                        alert("Internal error.");
                     }
-
-
-                }
-                );
+                });
             thisCtrl.newText = "";
             $location.url('/chat/' + this.gID)
 

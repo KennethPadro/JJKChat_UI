@@ -33,29 +33,23 @@ angular.module('AppChat').controller('ReactDetailsController', ['$http', '$log',
                     thisCtrl.likeDetails = response.data;
                 }, //Error function
                 function (response) {
-                    // This is the error function
-                    // If we get here, some error occurred.
-                    // Verify which was the cause and show an alert.
                     var status = response.status;
-                    //console.log("Error: " + reqURL);
-                    //alert("Cristo");
-                    if (status == 0) {
-                        alert("No hay conexion a Internet");
+                    if (status === 0) {
+                        alert("No internet connection");
                     }
-                    else if (status == 401) {
-                        alert("Su sesion expiro. Conectese de nuevo.");
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
                     }
-                    else if (status == 403) {
-                        alert("No esta autorizado a usar el sistema.");
+                    else if (status === 403) {
+                        alert("Not authorized");
                     }
-                    else if (status == 404) {
-                        //alert("No se encontro la informacion solicitada.");
+                    else if (status === 404) {
+                        alert("Not found");
                     }
                     else {
-                        alert("Error interno del sistema.");
+                        alert("Internal error.");
                     }
-                }
-            );
+                });
         };
         this.loadDislikeDetails = function () {
             // Get the target part id from the parameter in the url
@@ -73,29 +67,23 @@ angular.module('AppChat').controller('ReactDetailsController', ['$http', '$log',
                     thisCtrl.dislikeDetails = response.data;
                 }, //Error function
                 function (response) {
-                    // This is the error function
-                    // If we get here, some error occurred.
-                    // Verify which was the cause and show an alert.
                     var status = response.status;
-                    //console.log("Error: " + reqURL);
-                    //alert("Cristo");
-                    if (status == 0) {
-                        alert("No hay conexion a Internet");
+                    if (status === 0) {
+                        alert("No internet connection");
                     }
-                    else if (status == 401) {
-                        alert("Su sesion expiro. Conectese de nuevo.");
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
                     }
-                    else if (status == 403) {
-                        alert("No esta autorizado a usar el sistema.");
+                    else if (status === 403) {
+                        alert("Not authorized");
                     }
-                    else if (status == 404) {
-                        //alert("No se encontro la informacion solicitada.");
+                    else if (status === 404) {
+                        alert("Not found");
                     }
                     else {
-                        alert("Error interno del sistema.");
+                        alert("Internal error.");
                     }
-                }
-            );
+                });
         };
 
         this.loadLikeDetails();
