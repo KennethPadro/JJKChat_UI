@@ -4,6 +4,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
         this.pID = $localStorage.pID;
 
         this.groupList = [];
+        this.groupList2 = [];
 
         this.loadGroups = function () {
 
@@ -42,6 +43,44 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
         };
 
         this.loadGroups();
+
+        this.loadGroups2 = function () {
+
+            var url = "http://127.0.0.1:5000/JJKChat/users/"+ thisCtrl.pID +"/ownedgroups";
+
+
+            $http.get(url).then(
+                function (response) {
+
+
+                    console.log("response: " + JSON.stringify(response));
+
+                    thisCtrl.groupList2 = response.data;
+                    console.log(thisCtrl.groupList2)
+
+                },
+                function (response) {
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    }
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    }
+                    else if (status === 403) {
+                        alert("Not authorized");
+                    }
+                    else if (status === 404) {
+                        alert("Not found");
+                    }
+                    else {
+                        alert("Internal error.");
+                    }
+                });
+
+        };
+
+        this.loadGroups2();
 
         this.enterGroup = function (gID) {
             $location.url('/chat/' + gID);
