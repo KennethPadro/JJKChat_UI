@@ -1,37 +1,39 @@
 <div ng-cloak style="align-content: center">
     <div class="row">
         <div class="col s12 m6">
-
             <div class="card-action white">
                 <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.logOut()">Log Out
                 </button>
             </div>
-
         </div>
-
     </div>
     <div class="row">
         <div class="col s12 m6">
-
             <div class="card-action white">
                 <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.goToGroups()">GO back To My Groups
                 </button>
             </div>
-
         </div>
-
     </div>
     <div class="row">
         <div class="col s12 m6">
-
             <div class="card-action white">
                 <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.reloadPage()">Reload Page
                     <i class="material-icons right">cached</i>
                 </button>
             </div>
-
         </div>
-
+    </div>
+    <!-- 
+    Added by Jesi
+    Trying to add a button to search members of a specific group
+     -->
+    <div class="row">
+        <div class="col s12 m6">
+            <ul class="collection">
+                <li ng-repeat="user in chatCtrl.membersList" class="collection-item">{{user.first_name}} {{user.last_name}}</li>
+            </ul>
+        </div>
     </div>
     <div class="row">
         <div class="col s12 m6">
@@ -48,7 +50,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="row">
         <div class="col s12 m6">
@@ -65,9 +66,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-
     <!--<div  id="chat-list" style="height:300px;overflow:auto">-->
     <div>
         <!-- Here come the messages in the chat, each one presented in card -->
@@ -91,11 +90,13 @@
                             </button>
                             <span ng-bind="m.likes"> </span>
 
+
                             <button class="btn-floating btn-small waves-effect waves-light red" ng-click="chatCtrl.dislike(m.mID)">
                                 <i class="material-icons">thumb_down
                                 </i>
                             </button>
                             <span ng-bind="m.dislikes"> </span>
+
                             <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.viewReacts(m.post_id)">View Reacts
 
                             </button>
