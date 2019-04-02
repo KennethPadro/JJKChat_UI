@@ -1,5 +1,5 @@
 angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope', '$location', '$route', '$routeParams', '$localStorage',
-    function ($http, $log, $scope, $location, $route, $routeParams, $localStorage) {
+        function ($http, $log, $scope, $location, $route, $routeParams, $localStorage) {
         var thisCtrl = this;
         this.gID = $routeParams.gID;
         this.pID = $localStorage.pID;
@@ -284,6 +284,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
 
         };
+        
         this.viewReacts = function (mID) {
             $location.url('/reactDetails/' + mID);
         };
@@ -300,4 +301,9 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
             $location.url('/chatGroups');
         }
+
+        //Run this.viewMembers
+        this.viewMembers();
+
+
     }]);
