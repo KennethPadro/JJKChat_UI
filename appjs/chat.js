@@ -208,7 +208,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         
         ///Added by Jesi
         this.viewMembers = function(){
-            var url = "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/member";
+            var url = "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/members";
 
 
             // Now set up the $http object
