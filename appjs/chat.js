@@ -246,7 +246,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                 });
 
-            $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
+            $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.membersList));
 
 
         };
