@@ -20,6 +20,10 @@
             templateUrl: 'pages/chatgroups.html',
             controller: 'ChatGroupsController',
             controllerAs: 'groupsCtrl'
+        }).when('/contacts', {
+            templateUrl: 'pages/contacts.html',
+            controller: 'ContactsController',
+            controllerAs: 'contactsCtrl'
         }).when('/allGroups', {
             templateUrl: 'pages/allgroups.html',
             controller: 'AllChatGroupsController',

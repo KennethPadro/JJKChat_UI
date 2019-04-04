@@ -1,0 +1,20 @@
+<div ng-cloak style="align-content: center">
+    <div class="card-action white">
+        <button class="btn waves-effect waves-light " type="submit" name="action" ng-click="groupsCtrl.logOut()">Log Out
+            <i class="material-icons right">send</i>
+        </button>
+        <a href="#!/allGroups" class="btn btn-link">View All Groups</a>
+    </div>
+    <div>
+        <ul class="collection">
+            <li class="collection-item avatar" ng-repeat="c in contactsCtrl.contactsList">
+                <i class="material-icons circle">person</i>
+                <span class="title">{{c.first_name}} {{c.last_name}}</span>
+                <p>{{c.username}} <br>
+                    {{c.phone}}
+                </p>
+                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+            </li>
+        </ul>
+    </div>
+</div>
