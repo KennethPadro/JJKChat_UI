@@ -7,7 +7,7 @@ function ($http, $log, $scope, $location, $route, $routeParams, $localStorage) {
 
     this.loadGroups = function () {
 
-        var url = "http://127.0.0.1:5000/JJKChat/posts";
+        var url = "http://127.0.0.1:5000/JJKChat/post";
 
 
         $http.get(url).then(

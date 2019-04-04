@@ -7,7 +7,7 @@ angular.module('AppChat').controller('AllChatGroupsController', ['$http', '$log'
 
         this.loadGroups = function () {
 
-            var url = "http://127.0.0.1:5000/JJKChat/groups";
+            var url = "http://127.0.0.1:5000/JJKChat/group";
 
             $http.get(url).then(
                 function (response) {

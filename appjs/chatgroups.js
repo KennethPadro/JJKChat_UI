@@ -8,7 +8,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
 
         this.loadGroups = function () {
 
-            var url = "http://127.0.0.1:5000/JJKChat/users/"+ thisCtrl.pID + "/member";
+            var url = "http://127.0.0.1:5000/JJKChat/user/"+ thisCtrl.pID + "/member";
 
 
             $http.get(url).then(
@@ -46,7 +46,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
 
         this.loadGroups2 = function () {
 
-            var url = "http://127.0.0.1:5000/JJKChat/users/"+ thisCtrl.pID +"/ownedgroups";
+            var url = "http://127.0.0.1:5000/JJKChat/user/"+ thisCtrl.pID +"/ownedgroups";
 
 
             $http.get(url).then(
