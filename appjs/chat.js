@@ -14,7 +14,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         this.loadMessages = function () {
 
-            var url = "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post";
+            var url = "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/detailedpost";
 
 
             $http.get(url).then(
