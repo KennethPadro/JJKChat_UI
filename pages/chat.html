@@ -108,7 +108,7 @@
                             </button>
                         </div>
                         <ul class="collection">
-                            <li class="collection-item" ng-repeat="r in m.replies" >{{r.reply_message}}</li>
+                            <li class="collection-item" ng-repeat="r in m.replies" ><h5>{{r.first_name}} {{r.last_name}}</h5> < class="left-align{{r.reply_date}} <br>{{r.reply_message}}  </li>
                         </ul>
                     </div>
                 </div>
