@@ -1,6 +1,6 @@
 (function () {
 
-    var app = angular.module('AppChat', ['ngRoute', 'ngStorage','ngMaterial']);
+    var app = angular.module('AppChat', ['ngRoute', 'ngStorage','ngMaterial','material.svgAssetsCache', 'ngMaterialCollapsible']);
 
     app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
