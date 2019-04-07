@@ -1,5 +1,5 @@
 angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope', '$location', '$route', '$routeParams', '$localStorage',
-        function ($http, $log, $scope, $location, $route, $routeParams, $localStorage) {
+    function ($http, $log, $scope, $location, $route, $routeParams, $localStorage) {
         var thisCtrl = this;
         this.gID = $routeParams.gID;
         this.pID = $localStorage.pID;
@@ -9,7 +9,6 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         this.newText = "";
         this.message = "";
-        this.counter = 1000;
 
         this.loadMessages = function () {
 
@@ -43,7 +42,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                 });
 
-            $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
+         //  $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
         };
 
         this.loadMessages();
@@ -208,14 +207,14 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                 });
 
-            $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
+          //  $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
 
         };
         this.reloadPage = function () {
             $route.reload()
 
         };
-        
+
         ///Added by Jesi
         this.viewMembers = function(){
             var url = "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/members";
@@ -253,11 +252,11 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                 });
 
-            $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.membersList));
+         //   $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.membersList));
 
 
         };
-        
+
         this.viewReacts = function (mID) {
             $location.url('/reactDetails/' + mID);
         };
