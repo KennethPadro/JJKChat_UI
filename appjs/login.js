@@ -4,7 +4,7 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
 
 
         this.checkLogin = function () {
-            $localStorage.pID = 2///THIS IS FOR AUTOMATIC LOGIN MUST REMOVE
+            $localStorage.pID = 1///THIS IS FOR AUTOMATIC LOGIN MUST REMOVE
             console.log('Checking PID');
             if ($localStorage.pID !== undefined) {
                 console.log('pID Defined');

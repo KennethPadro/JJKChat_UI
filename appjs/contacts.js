@@ -8,7 +8,7 @@ angular.module('AppChat').controller('ContactsController', ['$http', '$log', '$s
 
         this.loadContacts = function () {
 
-            var url = "http://127.0.0.1:5000/JJKChat/user/31/contact";
+            var url = "http://127.0.0.1:5000/JJKChat/user/" + thisCtrl.pID + "/contact";
 
 
             $http.get(url).then(
