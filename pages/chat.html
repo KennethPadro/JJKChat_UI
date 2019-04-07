@@ -64,27 +64,18 @@
                             </p>
                         </div>
                         <div class="card-action">
-                            <button class="btn-floating btn-small waves-effect waves-light green" ng-click="chatCtrl.like(m.mID)">
-                                <i class="material-icons">thumb_up
-                                </i>
-                            </button>
+                            <button class="btn-floating btn-small waves-effect waves-light green" ng-click="chatCtrl.like(m.mID)"><i class="material-icons">thumb_up</i></button>
                             <span ng-bind="m.likes"> </span>
-                            <button class="btn-floating btn-small waves-effect waves-light red" ng-click="chatCtrl.dislike(m.mID)">
-                                <i class="material-icons">thumb_down
-                                </i>
-                            </button>
+                            <button class="btn-floating btn-small waves-effect waves-light red" ng-click="chatCtrl.dislike(m.mID)"><i class="material-icons">thumb_down</i></button>
                             <span ng-bind="m.dislikes"> </span>
+                            <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.viewReacts(m.post_id)">View Reacts</button>
+                            <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.replyToMessage(m.post_id)">Reply To Message</button>
 
-                            <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.viewReacts(m.post_id)">View Reacts
-
-                            </button>
-                            <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.replyToMessage(m.post_id)">Reply To Message
-
-                            </button>
                         </div>
                         <ul class="collection">
                             <li class="collection-item" ng-repeat="r in m.replies" ><h5>{{r.first_name}} {{r.last_name}}</h5> {{r.reply_date}} <br>{{r.reply_message}}  </li>
                         </ul>
+                        <textarea style="background: white" id="textfield2" class="materialize-textarea"></textarea>
                     </div>
                 </div>
             </div>
