@@ -1,44 +1,38 @@
-<div ng-cloak style="align-content: center">
+<div ng-cloak>
     <div class="row">
-        <div class="col s12 m6">
-
+        <div class="col s12">
             <div class="card-action white">
                 <button class="btn waves-effect waves-light " type="submit" name="action" ng-click="reactDCtrl.logOut()">Log Out
                     <i class="material-icons right">send</i>
                 </button>
             </div>
-
         </div>
-
     </div>
     <div class="row">
-        <div class="col s12 m6">
+        <div class="col s12 ">
             <div class="card">
                 <div class="card-content">
                     <span class="card-title">Liked by</span>
                     <table>
                         <tbody>
-                            <tr ng-repeat="like in reactDCtrl.likeDetails">
-                                <th>Person Name: </th>
-                                <th>{{like.first_name}} {{like.last_name}}</th>
-                            </tr>
-
+                        <tr ng-repeat="like in reactDCtrl.likeDetails">
+                            <th>Person Name: </th>
+                            <th>{{like.first_name}} {{like.last_name}}</th>
+                        </tr>
                         </tbody>
                     </table>
                     <span class="card-title">Disliked by</span>
                     <table>
                         <tbody>
-                            <tr ng-repeat="dislike in reactDCtrl.dislikeDetails">
-                                <th>Person Name: </th>
-                                <th>{{dislike.first_name}} {{dislike.last_name}}</th>
-                            </tr>
+                        <tr ng-repeat="dislike in reactDCtrl.dislikeDetails">
+                            <th>Person Name: </th>
+                            <th>{{dislike.first_name}} {{dislike.last_name}}</th>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="card-action white">
-                    <button class="btn waves-effect waves-light " type="submit" name="action" ng-click="reactDCtrl.backToChat()">Go Back
-
-                    </button>
+                    <button class="btn waves-effect waves-light " type="submit" name="action" ng-click="reactDCtrl.backToChat()">Go Back</button>
                 </div>
             </div>
         </div>
