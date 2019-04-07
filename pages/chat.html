@@ -2,23 +2,16 @@
     <div class="row">
         <div class="col s12">
             <div class="card-action ">
-                <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.logOut()">Log Out
-                </button>
+                <!--<button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.logOut()">Log Out-->
+                <!--</button>-->
                 <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.goToGroups()">GO back To My Groups
                 </button>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s12">
-            <div class="card-action ">
                 <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.reloadPage()">Reload Page
                     <i class="material-icons right">cached</i>
                 </button>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col s12">
             <md-collapsible class="md-accordion">
@@ -44,7 +37,7 @@
                     <textarea style="background: white" id="textfield" class="materialize-textarea" ng-model="chatCtrl.newText"></textarea>
                 </div>
                 <div class="card-action white">
-                    <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.postMsg()">Enviar
+                    <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.postMsg()">Send
                         <i class="material-icons right">send</i>
                     </button>
                 </div>
