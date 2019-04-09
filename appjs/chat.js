@@ -1,4 +1,4 @@
-xangular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope', '$location', '$route', '$routeParams', '$localStorage',
+angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope', '$location', '$route', '$routeParams', '$localStorage',
     function ($http, $log, $scope, $location, $route, $routeParams, $localStorage) {
         var thisCtrl = this;
         this.gID = $routeParams.gID;
