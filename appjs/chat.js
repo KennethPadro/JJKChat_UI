@@ -151,12 +151,22 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             //$route.reload()
         };
 
-        this.dislike = function (mID) {
-            var url = "http://127.0.0.1:5000/JJKChat/ChatApp/dislike/message/" + mID + "/person/" + thisCtrl.pID;
+        this.dislike = function (pID) {
+            var data = {};
+            data.user_id = pID;
+            data.post_id = pID;
+            console.log("response: " + JSON.stringify(data));
+            $http({
+                url: 'http://127.0.0.1:5000/JJKChat/post/dislike',
+                dataType: 'json',
+                method: 'POST',
+                data: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json"
+                }
 
-            // Now set up the $http object
-            // It has two function call backs, one for success and one for error
-            $http.post(url).then(// success call back
+
+            }).then(// success call back
                 function (response) {
                     // The is the sucess function!
                     // Copy the list of parts in the data variable
@@ -183,7 +193,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                         alert("Internal error.");
                     }
                 });
-            $route.reload()
+            //$route.reload()
         };
 
         this.searchHashtags = function () {
