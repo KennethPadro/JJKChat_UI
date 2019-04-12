@@ -67,9 +67,9 @@
                             </div>
                         </div>
                         <div class="card-action">
-                            <button class="btn-floating btn-small waves-effect waves-light green" ng-click="chatCtrl.like(m.mID)"><i class="material-icons">thumb_up</i></button>
+                            <button class="btn-floating btn-small waves-effect waves-light green" ng-click="chatCtrl.like(m.post_id)"><i class="material-icons">thumb_up</i></button>
                             <span ng-bind="m.likes"> </span>
-                            <button class="btn-floating btn-small waves-effect waves-light red" ng-click="chatCtrl.dislike(m.mID)"><i class="material-icons">thumb_down</i></button>
+                            <button class="btn-floating btn-small waves-effect waves-light red" ng-click="chatCtrl.dislike(m.post_id)"><i class="material-icons">thumb_down</i></button>
                             <span ng-bind="m.dislikes"> </span>
                             <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.viewReacts(m.post_id)">View Reacts</button>
                             <!--<button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.replyToMessage(m.post_id)">Reply To Message</button>-->

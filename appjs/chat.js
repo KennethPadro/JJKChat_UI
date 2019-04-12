@@ -106,16 +106,30 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             thisCtrl.newText = "";
         };
 
-        this.like = function (mID) {
-            var url = "http://127.0.0.1:5000/JJKChat/ChatApp/like/message/" + mID + "/person/" + thisCtrl.pID;
+        this.like = function (pID) {
+            var data = {};
+            data.user_id = pID;
+            data.post_id = pID;
+            console.log("response: " + JSON.stringify(data));
+            $http({
+                url: 'http://127.0.0.1:5000/JJKChat/post/like',
+                dataType: 'json',
+                method: 'POST',
+                data: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json"
+                }
 
-            $http.post(url).then(
+
+            }).then(// success call back
                 function (response) {
-
+                    // The is the sucess function!
+                    // Copy the list of parts in the data variable
+                    // into the list of parts in the controller.
 
                     console.log("response: " + JSON.stringify(response));
 
-                },
+                }, // error callback
                 function (response) {
                     var status = response.status;
                     if (status === 0) {
@@ -134,7 +148,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                         alert("Internal error.");
                     }
                 });
-            $route.reload()
+            //$route.reload()
         };
 
         this.dislike = function (mID) {
