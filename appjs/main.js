@@ -40,6 +40,10 @@
             templateUrl: 'pages/allposts.html',
             controller: 'AllPostsController',
             controllerAs: 'allPostsCtrl'
+        }).when('/statistics', {
+            templateUrl: 'pages/statistics.html',
+            controller: 'StatisticsController',
+            controllerAs: 'StatsCtrl'
         }).otherwise({
             redirectTo: '/login'
         });
