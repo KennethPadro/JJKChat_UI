@@ -1,4 +1,277 @@
 <div ng-cloak >
+    
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>JJKChat Statistics</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/bootstrap/bootstrap4-alpha3.min.css">
+    <style>
+    body {
+        background-color: #fafafa;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: 400;
+    }
+
+    #header {
+        border-bottom: 5px solid #37474F;
+        color: #37474F;
+        margin-bottom: 1.5rem;
+        padding: 1rem 0;
+    }
+
+    #revenue-tag {
+        font-weight: inherit !important;
+        border-radius: 0px !important;
+    }
+
+    .card {
+        border: 0rem;
+        border-radius: 0rem;
+    }
+
+    .card-header {
+        background-color: #37474F;
+        border-radius: 0 !important;
+        color: white;
+        margin-bottom: 0;
+        padding: 1rem;
+    }
+
+    .card-block {
+        border: 1px solid #cccccc;
+    }
+
+    .shadow {
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+            0 1px 18px 0 rgba(0, 0, 0, 0.12),
+            0 3px 5px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    #post-per-day,
+    #replies-per-day,
+    #likes-per-day,
+    #dislikes-per-day {
+        height: 300px;
+        width: 100%;
+    }
+    </style>
+    <!-- Scripts -->
+    <script src="assets/jquery/jquery-3.1.0.min.js"></script>
+    <script src="assets/tether/tether.min.js"></script>
+    <script src="assets/bootstrap/bootstrap4-alpha3.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script>
+        
+    $(function() {
+
+        // total number of posts per day
+        console.log("Entered");
+
+        var postPerDayDataPoints = [];
+
+        var postPerDaychart = new CanvasJS.Chart("post-per-day", {
+            animationEnabled: true,
+            theme: "light2",
+            backgroundColor: "transparent",
+            //title: {
+            //    text: "Post Per Day"
+            //},
+            axisY: {
+                title: "Number of posts",
+                titleFontSize: 24
+            },
+            toolTip: {
+                borderThickness: 0,
+                cornerRadius: 0
+            },
+            data: [{
+                type: "spline",
+                yValueFormatString: "###,### posts",
+                dataPoints: postPerDayDataPoints
+            }]
+        });
+
+        function addPostPerDayData(data) {
+            for (var i = 0; i < data.length; i++) {
+                postPerDayDataPoints.push({
+                    x: new Date(data[i].day),
+                    y: data[i].total
+                });
+            }
+            postPerDaychart.render();
+        }
+
+        $.getJSON("http://127.0.0.1:5000/JJKChat/post/countperday", addPostPerDayData);
+
+        //Total number of replies per day
+
+        var repliesPerDayDataPoints = [];
+
+        var repliesPerDaychart = new CanvasJS.Chart("replies-per-day", {
+            animationEnabled: true,
+            theme: "light2",
+            backgroundColor: "transparent",
+            //title: {
+            //    text: "Post Per Day"
+            //},
+            axisY: {
+                title: "Number of replies",
+                titleFontSize: 24
+            },
+            toolTip: {
+                borderThickness: 0,
+                cornerRadius: 0
+            },
+            data: [{
+                type: "spline",
+                yValueFormatString: "###,### replies",
+                dataPoints: repliesPerDayDataPoints
+            }]
+        });
+
+        function addRepliesPerDayData(data) {
+            for (var i = 0; i < data.length; i++) {
+                repliesPerDayDataPoints.push({
+                    x: new Date(data[i].day),
+                    y: data[i].total
+                });
+            }
+            repliesPerDaychart.render();
+        }
+
+        $.getJSON("http://127.0.0.1:5000/JJKChat/replies/count", addRepliesPerDayData);
+
+
+        //Total number of Likes per day
+        var likesPerDayDataPoints = [];
+
+        var likesPerDaychart = new CanvasJS.Chart("likes-per-day", {
+            animationEnabled: true,
+            theme: "light2",
+            backgroundColor: "transparent",
+            //title: {
+            //    text: "Post Per Day"
+            //},
+            axisY: {
+                title: "Number of likes",
+                titleFontSize: 24
+            },
+            toolTip: {
+                borderThickness: 0,
+                cornerRadius: 0
+            },
+            data: [{
+                type: "spline",
+                yValueFormatString: "###,### likes",
+                dataPoints: likesPerDayDataPoints
+            }]
+        });
+
+        function addLikesPerDayData(data) {
+            for (var i = 0; i < data.length; i++) {
+                likesPerDayDataPoints.push({
+                    x: new Date(data[i].day),
+                    y: data[i].total
+                });
+            }
+            likesPerDaychart.render();
+        }
+
+        $.getJSON("http://127.0.0.1:5000/JJKChat/likes/count", addLikesPerDayData);
+
+        //Total number of dislikes per day
+        var dislikesPerDayDataPoints = [];
+
+        var dislikesPerDaychart = new CanvasJS.Chart("dislikes-per-day", {
+            animationEnabled: true,
+            theme: "light2",
+            backgroundColor: "transparent",
+            //title: {
+            //    text: "Post Per Day"
+            //},
+            axisY: {
+                title: "Number of dislikes",
+                titleFontSize: 24
+            },
+            toolTip: {
+                borderThickness: 0,
+                cornerRadius: 0
+            },
+            data: [{
+                type: "spline",
+                yValueFormatString: "###,### dislikes",
+                dataPoints: dislikesPerDayDataPoints
+            }]
+        });
+
+        function addDislikesPerDayData(data) {
+            for (var i = 0; i < data.length; i++) {
+                dislikesPerDayDataPoints.push({
+                    x: new Date(data[i].day),
+                    y: data[i].total
+                });
+            }
+            dislikesPerDaychart.render();
+        }
+
+        $.getJSON("http://127.0.0.1:5000/JJKChat/dislikes/count", addDislikesPerDayData);
+
+        //CanvasJS spline chart to show orders from Jan 2015 to Dec 2015
+        var ordersSplineChart = new CanvasJS.Chart("orders-spline-chart", {
+            animationEnabled: true,
+            backgroundColor: "transparent",
+            theme: "theme2",
+            toolTip: {
+                borderThickness: 0,
+                cornerRadius: 0
+            },
+            axisX: {
+                labelFontSize: 14,
+                maximum: new Date("31 Dec 2015"),
+                valueFormatString: "MMM YYYY"
+            },
+            axisY: {
+                gridThickness: 0,
+                labelFontSize: 14,
+                lineThickness: 2
+            },
+            data: [{
+                type: "spline",
+                dataPoints: [
+                    { x: new Date("1 Jan 2015"), y: 17376 },
+                    { x: new Date("1 Feb 2015"), y: 21431 },
+                    { x: new Date("1 Mar 2015"), y: 25724 },
+                    { x: new Date("1 Apr 2015"), y: 22138 },
+                    { x: new Date("1 May 2015"), y: 20676 },
+                    { x: new Date("1 Jun 2015"), y: 25429 },
+                    { x: new Date("1 Jul 2015"), y: 29160 },
+                    { x: new Date("1 Aug 2015"), y: 23317 },
+                    { x: new Date("1 Sep 2015"), y: 31883 },
+                    { x: new Date("1 Oct 2015"), y: 30034 },
+                    { x: new Date("1 Nov 2015"), y: 31768 },
+                    { x: new Date("1 Dec 2015"), y: 41215 }
+                ]
+            }]
+        });
+
+        ordersSplineChart.render();
+
+    });
+    </script>
+</head>
+
+<body>
     <div class="container">
         <h2 id="header">
             <strong>JJKChat</strong>
@@ -64,4 +337,5 @@
             </div>
         </div> <!-- row -->
     </div> <!-- container -->
+</body>
 </div>

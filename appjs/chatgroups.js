@@ -1,5 +1,6 @@
 angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '$scope', '$location', '$route', '$routeParams', '$localStorage',
     function ($http, $log, $scope, $location, $route, $routeParams, $localStorage) {
+        
         var thisCtrl = this;
         this.pID = $localStorage.pID;
 
