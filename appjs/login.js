@@ -4,7 +4,7 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
 
 
         this.checkLogin = function () {
-            $localStorage.pID = 1///THIS IS FOR AUTOMATIC LOGIN MUST REMOVE
+            //$localStorage.pID = 1///THIS IS FOR AUTOMATIC LOGIN MUST REMOVE
             console.log('Checking PID');
             if ($localStorage.pID !== undefined) {
                 console.log('pID Defined');
@@ -17,7 +17,7 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
             post.password = loginCtrl.password;
 
             $http({
-                url: 'http://127.0.0.1:5000/JJKChat/ChatApp/login',
+                url: 'http://127.0.0.1:5000/JJKChat/login',
                 dataType: 'json',
                 method: 'POST',
                 data: post,
@@ -27,10 +27,11 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
             }).then(
                 function (response) {
                     console.log("User: " + JSON.stringify(response.data));
-                    this.userDetails = response.data.Authentication
+                    this.userDetails = response.data
                     if (this.userDetails.authenticated) {
                         $localStorage.pID = this.userDetails.pID;
-                        $window.location.href = '/#!/allGroups';
+                        //$window.location.href = '/allGroups';
+                        $location.url('/allGroups');
 
                     } else {
                         alert("Wrong Credentials");
@@ -52,7 +53,9 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
                         alert("Not authorized");
                     }
                     else if (status === 404) {
-                        alert("Not found");
+                        alert("User not found");
+                        loginCtrl.username = ""
+                        loginCtrl.password = ""
                     }
                     else {
                         alert("Internal error.");
