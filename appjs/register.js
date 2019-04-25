@@ -8,14 +8,14 @@ angular.module('AppChat').controller('RegisterController', ['$http', '$log', '$s
             var postObject = new Object();
             postObject.username = registerCtrl.username;
             postObject.password = registerCtrl.password;
-            postObject.pfirstname = registerCtrl.firstName;
-            postObject.plastname = registerCtrl.lastName;
-            postObject.pphone = registerCtrl.phone;
-            postObject.pemail = registerCtrl.email;
+            postObject.first_name = registerCtrl.firstName;
+            postObject.last_name = registerCtrl.lastName;
+            postObject.phone = registerCtrl.phone;
+            postObject.email = registerCtrl.email;
             console.log(postObject);
             $http({
 
-                url: "http://127.0.0.1:5000/JJKChat/ChatApp/person",
+                url: "http://127.0.0.1:5000/JJKChat/register",
                 dataType: 'json',
                 method: 'POST',
                 data: postObject,
@@ -27,9 +27,10 @@ angular.module('AppChat').controller('RegisterController', ['$http', '$log', '$s
                     // The is the sucess function!
                     // Copy the list of parts in the data variable
                     // into the list of parts in the controller.
-                    $window.location.href = '/#!/login';
+                    //$window.location.href = '/#!/login';
                     console.log("response: " + JSON.stringify(response));
                     $location.url("/login")
+                    //$location.url('/allGroups');
                 }, // error callback
                 function (response) {
                     var status = response.status;
