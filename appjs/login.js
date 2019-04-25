@@ -29,7 +29,7 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
                     console.log("User: " + JSON.stringify(response.data));
                     this.userDetails = response.data
                     if (this.userDetails.authenticated) {
-                        $localStorage.pID = this.userDetails.pID;
+                        $localStorage.pID = this.userDetails.user_id;
                         //$window.location.href = '/allGroups';
                         $location.url('/allGroups');
 
