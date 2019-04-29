@@ -281,6 +281,48 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         };
 
+
+        this.removeMember = function (user_id) {
+            var post = new Object();
+            post.user_id = user_id;
+            console.log("User: " + JSON.stringify(user_id));
+            $http({
+                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/members",
+                dataType: 'json',
+                method: 'DELETE',
+                data: post,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(
+                function (response) {
+                    console.log("User: " + JSON.stringify(response.data));
+
+                },
+                function (response) {
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    }
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    }
+                    else if (status === 403) {
+                        alert("Not authorized");
+                    }
+                    else if (status === 404) {
+                        alert("User not found");
+                        loginCtrl.username = ""
+                        loginCtrl.password = ""
+                    }
+                    else {
+                        alert("Internal error.");
+                    }
+                });
+            // $route.reload()
+
+        };
+
         this.viewReacts = function (mID) {
             $location.url('/reactDetails/' + mID);
         };
