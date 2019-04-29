@@ -80,6 +80,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
                 });
 
         };
+        this.loadGroups2();
 
         this.createGroup = function () {
             var post = new Object();
@@ -119,10 +120,51 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
                         alert("Internal error.");
                     }
                 });
+            // $route.reload()
 
         };
 
-        this.loadGroups2();
+        this.deleteGroup = function (chat_group_id) {
+            var post = new Object();
+            post.chat_group_id = chat_group_id;
+            post.user_id = thisCtrl.pID;
+
+            $http({
+                url: 'http://127.0.0.1:5000/JJKChat/group',
+                dataType: 'json',
+                method: 'DELETE',
+                data: post,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(
+                function (response) {
+                    console.log("User: " + JSON.stringify(response.data));
+
+                },
+                function (response) {
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    }
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    }
+                    else if (status === 403) {
+                        alert("Not authorized");
+                    }
+                    else if (status === 404) {
+                        alert("User not found");
+                        loginCtrl.username = ""
+                        loginCtrl.password = ""
+                    }
+                    else {
+                        alert("Internal error.");
+                    }
+                });
+            // $route.reload()
+
+        };
 
         this.enterGroup = function (gID) {
             $location.url('/chat/' + gID);
