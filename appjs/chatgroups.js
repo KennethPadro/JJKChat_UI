@@ -81,6 +81,47 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
 
         };
 
+        this.createGroup = function () {
+            var post = new Object();
+            post.chat_name = thisCtrl.chat_name;
+            post.user_id = thisCtrl.pID;
+
+            $http({
+                url: 'http://127.0.0.1:5000/JJKChat/group',
+                dataType: 'json',
+                method: 'POST',
+                data: post,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(
+                function (response) {
+                    console.log("User: " + JSON.stringify(response.data));
+
+                },
+                function (response) {
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    }
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    }
+                    else if (status === 403) {
+                        alert("Not authorized");
+                    }
+                    else if (status === 404) {
+                        alert("User not found");
+                        loginCtrl.username = ""
+                        loginCtrl.password = ""
+                    }
+                    else {
+                        alert("Internal error.");
+                    }
+                });
+
+        };
+
         this.loadGroups2();
 
         this.enterGroup = function (gID) {

@@ -21,10 +21,15 @@
                         <div class="row">
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input  id="group_name" type="text" class="validate">
-                                        <label for="group_name">Group Name</label>
+                                        <input  ng-model="groupsCtrl.chat_name" name="chat_name" id="chat_name" type="text" class="validate">
+                                        <label for="chat_name">Group Name</label>
                                     </div>
                                 </div>
+                            <div class="form-actions">
+                                <button class="btn cyan waves-effect waves-light " type="submit" name="action" ng-click="groupsCtrl.createGroup()">Create Group
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
                             </form>
                         </div>
                     </md-collapsible-body>
