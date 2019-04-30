@@ -47,64 +47,108 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         this.loadMessages();
 
+        // this.postMsg = function () {
+        //
+        //     //Buscar la manera de crear un json object para guardar
+        //     //el contenido de thisCtrl.newText en la parte de texto
+        //     //del json que representa un post
+        //
+        //
+        //     var post = new Object();
+        //     post.post_id = thisCtrl.pID;
+        //     post.media = thisCtrl.gID;
+        //     post.message = thisCtrl.newText;
+        //     post.first_name = "Jesiniel"
+        //     post.last_name = "Nieves"
+        //
+        //
+        //     this.messageList.unshift(post);
+        //     // $http({
+        //     //     url: 'https://http://127.0.0.1:5000/JJKChat/ChatApp/message',
+        //     //     dataType: 'json',
+        //     //     method: 'POST',
+        //     //     data: post,
+        //     //     headers: {
+        //     //         "Content-Type": "application/json"
+        //     //     }
+        //
+        //
+        //     // }).then(// success call back
+        //     //     function (response) {
+        //     //         // The is the sucess function!
+        //     //         // Copy the list of parts in the data variable
+        //     //         // into the list of parts in the controller.
+        //
+        //     //         console.log("response: " + JSON.stringify(response));
+        //
+        //     //     }, // error callback
+        //     //     function (response) {
+        //     //         var status = response.status;
+        //     //         if (status === 0) {
+        //     //             alert("No internet connection");
+        //     //         }
+        //     //         else if (status === 401) {
+        //     //             alert("Your session expired. Login again");
+        //     //         }
+        //     //         else if (status === 403) {
+        //     //             alert("Not authorized");
+        //     //         }
+        //     //         else if (status === 404) {
+        //     //             alert("Not found");
+        //     //         }
+        //     //         else {
+        //     //             alert("Internal error.");
+        //     //         }
+        //     //     });
+        //     //$route.reload()
+        //
+        //
+        //     thisCtrl.newText = "";
+        // };
+
         this.postMsg = function () {
-
-            //Buscar la manera de crear un json object para guardar
-            //el contenido de thisCtrl.newText en la parte de texto 
-            //del json que representa un post
-
-
             var post = new Object();
-            post.post_id = thisCtrl.pID;
-            post.media = thisCtrl.gID;
+            post.user_id = thisCtrl.pID;
+            //post.gid = thisCtrl.gID;
             post.message = thisCtrl.newText;
-            post.first_name = "Jesiniel"
-            post.last_name = "Nieves"
+            post.media = "This is media"
+            $http({
+                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post",
+                dataType: 'json',
+                method: 'POST',
+                data: post,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(
+                function (response) {
+                    console.log("User: " + JSON.stringify(response.data));
 
+                },
+                function (response) {
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    }
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    }
+                    else if (status === 403) {
+                        alert("Not authorized");
+                    }
+                    else if (status === 404) {
+                        alert("User not found");
+                        loginCtrl.username = ""
+                        loginCtrl.password = ""
+                    }
+                    else {
+                        alert("Internal error.");
+                    }
+                });
+            // $route.reload()
 
-            this.messageList.unshift(post);
-            // $http({
-            //     url: 'https://http://127.0.0.1:5000/JJKChat/ChatApp/message',
-            //     dataType: 'json',
-            //     method: 'POST',
-            //     data: post,
-            //     headers: {
-            //         "Content-Type": "application/json"
-            //     }
-
-
-            // }).then(// success call back
-            //     function (response) {
-            //         // The is the sucess function!
-            //         // Copy the list of parts in the data variable
-            //         // into the list of parts in the controller.
-
-            //         console.log("response: " + JSON.stringify(response));
-
-            //     }, // error callback
-            //     function (response) {
-            //         var status = response.status;
-            //         if (status === 0) {
-            //             alert("No internet connection");
-            //         }
-            //         else if (status === 401) {
-            //             alert("Your session expired. Login again");
-            //         }
-            //         else if (status === 403) {
-            //             alert("Not authorized");
-            //         }
-            //         else if (status === 404) {
-            //             alert("Not found");
-            //         }
-            //         else {
-            //             alert("Internal error.");
-            //         }
-            //     });
-            //$route.reload()
-
-
-            thisCtrl.newText = "";
         };
+
 
         this.like = function (pID) {
             var data = {};
