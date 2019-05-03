@@ -271,6 +271,47 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
 
         this.loadDislikesPerDay();
 
+        //Trending by hashtags
+        
+        this.trendingTopics = [];
+        
+        this.loadTrendingTopics = function () {
+            console.log("Entered on Trending Topics");
+            var url = "http://127.0.0.1:5000/JJKChat/hashtag/trending";
+
+
+            $http.get(url).then(
+                function (response) {
+                    console.log("response: " + JSON.stringify(response.data));
+
+                    thisCtrl.trendingTopics = response.data;
+
+                },
+                function (response) {
+                    console.log("Entre en error");
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    }
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    }
+                    else if (status === 403) {
+                        alert("Not authorized");
+                    }
+                    else if (status === 404) {
+                        alert("Not found");
+                    }
+                    else {
+                        alert("Internal error.");
+                    }
+                });
+            console.log("Sali sin hacer nada en trending topics");
+         //  $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
+        };
+        console.log("Antes de la llamada!");
+        this.loadTrendingTopics();
+
 
         this.logOut = function() {
             delete $localStorage.pID;
