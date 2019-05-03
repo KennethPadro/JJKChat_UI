@@ -8,6 +8,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.membersList = []; //Added by Jesi for viewMembers function
 
         this.newText = "";
+        this.newText2 ="";
         this.message = "";
 
         this.loadMessages = function () {
@@ -371,8 +372,45 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             $location.url('/reactDetails/' + mID);
         };
 
-        this.replyToMessage = function (mID) {
-            $location.url('/replyToMessage/' + mID + "/" + this.gID);
+        this.replyToMessage = function (post_id) {
+            var post = new Object();
+            post.user_id = thisCtrl.pID;
+            post.reply_message = thisCtrl.newText2;
+            $http({
+                url: "http://127.0.0.1:5000/JJKChat/post/" + post_id + "/replies",
+                dataType: 'json',
+                method: 'POST',
+                data: post,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(
+                function (response) {
+                    console.log("User: " + JSON.stringify(response.data));
+
+                },
+                function (response) {
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    }
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    }
+                    else if (status === 403) {
+                        alert("Not authorized");
+                    }
+                    else if (status === 404) {
+                        alert("User not found");
+                        loginCtrl.username = ""
+                        loginCtrl.password = ""
+                    }
+                    else {
+                        alert("Internal error.");
+                    }
+                });
+            // $route.reload()
+
         };
         this.logOut = function () {
             delete $localStorage.pID;

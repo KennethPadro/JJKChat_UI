@@ -80,8 +80,8 @@
                             <li class="collection-item" ng-repeat="r in m.replies" ><h6>{{r.first_name}} {{r.last_name}}</h6> {{r.reply_message}}  <br> <p class="right-align">{{r.reply_date}}</p></li>
                         </ul>
                         <div >
-                            <textarea style="background: white" id="textfield2" class="materialize-textarea"></textarea>
-                            <button class="btn waves-effect cyan " type="submit" name="action" ng-click="">Reply
+                            <textarea style="background: white" id="textfield2" class="materialize-textarea"ng-model="chatCtrl.newText2"></textarea>
+                            <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.replyToMessage(m.post_id)">Reply
                                 <i class="material-icons right">send</i></button>
                         </div>
 
