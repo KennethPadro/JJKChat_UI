@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col s12">
+        <div class="col s6">
             <md-collapsible class="md-accordion">
                 <md-collapsible-item>
                     <md-collapsible-header layout="row">
@@ -23,6 +23,39 @@
                         <ul class="collection">
                             <li ng-repeat="user in chatCtrl.membersList" class="collection-item">{{user.first_name}} {{user.last_name}}<a type="submit" name="action" ng-click="chatCtrl.removeMember(user.user_id)" class="secondary-content"><i class="material-icons">delete</i></a></li>
                         </ul>
+
+                    </md-collapsible-body>
+                </md-collapsible-item>
+            </md-collapsible>
+        </div>
+        <div class="col s6">
+            <md-collapsible class="md-accordion">
+                <md-collapsible-item>
+                    <md-collapsible-header layout="row">
+                        View/Add Contacts
+                    </md-collapsible-header>
+                    <md-collapsible-body>
+                        <!--<ul class="collection">-->
+                            <!--<li ng-repeat="user in chatCtrl.membersList" class="collection-item">{{user.first_name}} {{user.last_name}}<a type="submit" name="action" ng-click="chatCtrl.removeMember(user.user_id)" class="secondary-content"><i class="material-icons">delete</i></a></li>-->
+                        <!--</ul>-->
+                        <div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <ul class="collection">
+                                        <li class="collection-item avatar" ng-repeat="c in chatCtrl.contactsList">
+                                            <i class="material-icons circle">person</i>
+                                            <span class="title">{{c.first_name}} {{c.last_name}}</span>
+                                            <p>{{c.username}} <br>
+                                                {{c.phone}}
+                                            </p>
+                                            <!--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
+                                            <a type="submit" name="action" ng-click="chatCtrl.addMember(c.user_id)" class="secondary-content"><i class="material-icons">group_add</i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
                     </md-collapsible-body>
                 </md-collapsible-item>
             </md-collapsible>

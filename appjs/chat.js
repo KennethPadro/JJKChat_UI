@@ -6,6 +6,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         this.messageList = [];
         this.membersList = []; //Added by Jesi for viewMembers function
+        this.contactsList = [];
 
         this.newText = "";
         this.newText2 ="";
@@ -421,6 +422,85 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
             $location.url('/chatGroups');
         }
+
+        this.loadContacts = function () {
+
+            var url = "http://127.0.0.1:5000/JJKChat/user/" + thisCtrl.pID + "/contact";
+
+
+            $http.get(url).then(
+                function (response) {
+
+
+                    console.log("response: " + JSON.stringify(response));
+
+                    thisCtrl.contactsList = response.data;
+                    console.log(thisCtrl.contactsList)
+
+                },
+                function (response) {
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    }
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    }
+                    else if (status === 403) {
+                        alert("Not authorized");
+                    }
+                    else if (status === 404) {
+                        alert("Not found");
+                    }
+                    else {
+                        alert("Internal error.");
+                    }
+                });
+
+        };
+
+        this.addMember = function (user_id) {
+            var post = new Object();
+            post.user_id = user_id;
+            console.log("User: " + JSON.stringify(user_id));
+            $http({
+                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/members",
+                dataType: 'json',
+                method: 'POST',
+                data: post,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(
+                function (response) {
+                    console.log("User: " + JSON.stringify(response.data));
+
+                },
+                function (response) {
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    }
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    }
+                    else if (status === 403) {
+                        alert("Not authorized");
+                    }
+                    else if (status === 404) {
+                        alert("User not found");
+                        loginCtrl.username = ""
+                        loginCtrl.password = ""
+                    }
+                    else {
+                        alert("Internal error.");
+                    }
+                });
+            // $route.reload()
+
+        };
+
+        this.loadContacts();
 
         //Run this.viewMembers
         this.viewMembers();
