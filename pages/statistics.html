@@ -8,7 +8,7 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="assets/bootstrap/bootstrap4-alpha3.min.css">
         <style>
-        body {
+            body {
             background-color: #fafafa;
             font-size: 16px;
             line-height: 1.5;
@@ -79,6 +79,17 @@
                 <strong>JJKChat</strong>
                 <small class="text-muted">Statistics</small>
             </h2>
+            <div class="row">
+                <div class="col s12">
+                    <div class="card-action">
+                        <button class="btn waves-effect cyan " type="submit" name="action" ng-click="allGroupsCtrl.logOut()">Log Out
+                            <i class="material-icons right">send</i>
+                        </button>
+                        <a href="#!/chatGroups" class="btn cyan btn-link">My Groups</a>
+                        <a href="#!/contacts" class="btn cyan btn-link">My Contacts</a>
+                    </div>
+                </div>
+            </div>
             <div class="row m-b-1">
                 <div class="col-lx-12">
                     <div class="card shadow">
