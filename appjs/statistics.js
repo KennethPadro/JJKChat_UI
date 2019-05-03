@@ -271,6 +271,78 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
 
         this.loadDislikesPerDay();
 
+        
+
+        this.postPerDayByUserDataPoints = [];
+
+        this.loadPostPerDayByUser = function() {
+
+            var url = "http://127.0.0.1:5000/JJKChat/dislikes/count";
+
+            $http.get(url).then(
+                function(response) {
+
+                    console.log("Entre aqui");
+
+                    var data = response.data;
+
+                    console.log("response: " + JSON.stringify(response));
+                    for (var i = 0; i < data.length; i++) {
+                        thisCtrl.postPerDayByUserDataPoints.push({
+                            x: new Date(data[i].day),
+                            y: data[i].total
+                        });
+
+                    }
+                    console.log(thisCtrl.postPerDayByUserDataPoints);
+
+                    postPerDayByUserchart.render();
+                },
+                function(response) {
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    } else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    } else if (status === 403) {
+                        alert("Not authorized");
+                    } else if (status === 404) {
+                        alert("Not found");
+                    } else {
+                        alert("Internal error.");
+                    }
+                });
+
+        };
+
+        var postPerDayByUserchart = new CanvasJS.Chart("post-per-day-by-user", {
+            animationEnabled: true,
+            theme: "light2",
+            backgroundColor: "transparent",
+            //title: {
+            //    text: "Post Per Day"
+            //},
+            axisY: {
+                title: "Number of post",
+                titleFontSize: 24
+            },
+            toolTip: {
+                borderThickness: 0,
+                cornerRadius: 0
+            },
+            data: [{
+                type: "spline",
+                yValueFormatString: "###,### posts",
+                dataPoints: this.postPerDayByUserDataPoints
+            }]
+        });
+
+        this.loadPostPerDayByUser();
+
+
+
+
+
         //Trending by hashtags
         
         this.trendingTopics = [];
@@ -309,7 +381,6 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
             console.log("Sali sin hacer nada en trending topics");
          //  $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
         };
-        console.log("Antes de la llamada!");
         this.loadTrendingTopics();
 
 
