@@ -1,5 +1,5 @@
-angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope', '$location', '$route', '$routeParams', '$localStorage',
-    function ($http, $log, $scope, $location, $route, $routeParams, $localStorage) {
+angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope', '$location', '$route', '$routeParams', '$localStorage','Upload','$timeout',
+    function ($http, $log, $scope, $location, $route, $routeParams, $localStorage, Upload,$timeout) {
         var thisCtrl = this;
         this.gID = $routeParams.gID;
         this.pID = $localStorage.pID;
@@ -11,6 +11,68 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.newText = "";
         this.newText2 ="";
         this.message = "";
+
+        $scope.uploadPic = function(file) {
+            file.upload = Upload.upload({
+                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post",
+                data: {user_id: thisCtrl.pID, message: $scope.message, file: file},
+            });
+
+            file.upload.then(function (response) {
+                $timeout(function () {
+                    file.result = response.data;
+                });
+            }, function (response) {
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            }, function (evt) {
+                // Math.min is to fix IE which reports 200% sometimes
+                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+            });
+        };
+
+        this.postMsg = function () {
+            var post = new Object();
+            post.user_id = thisCtrl.pID;
+            //post.gid = thisCtrl.gID;
+            post.message = thisCtrl.newText;
+            post.media = "This is media"
+            $http({
+                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post",
+                dataType: 'json',
+                method: 'POST',
+                data: post,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(
+                function (response) {
+                    console.log("User: " + JSON.stringify(response.data));
+
+                },
+                function (response) {
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    }
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    }
+                    else if (status === 403) {
+                        alert("Not authorized");
+                    }
+                    else if (status === 404) {
+                        alert("User not found");
+                        loginCtrl.username = ""
+                        loginCtrl.password = ""
+                    }
+                    else {
+                        alert("Internal error.");
+                    }
+                });
+            // $route.reload()
+
+        };
 
         this.loadMessages = function () {
 
@@ -44,7 +106,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                 });
 
-         //  $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
+            //  $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
         };
 
         this.loadMessages();
@@ -108,48 +170,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         //     thisCtrl.newText = "";
         // };
 
-        this.postMsg = function () {
-            var post = new Object();
-            post.user_id = thisCtrl.pID;
-            //post.gid = thisCtrl.gID;
-            post.message = thisCtrl.newText;
-            post.media = "This is media"
-            $http({
-                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post",
-                dataType: 'json',
-                method: 'POST',
-                data: post,
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            }).then(
-                function (response) {
-                    console.log("User: " + JSON.stringify(response.data));
 
-                },
-                function (response) {
-                    var status = response.status;
-                    if (status === 0) {
-                        alert("No internet connection");
-                    }
-                    else if (status === 401) {
-                        alert("Your session expired. Login again");
-                    }
-                    else if (status === 403) {
-                        alert("Not authorized");
-                    }
-                    else if (status === 404) {
-                        alert("User not found");
-                        loginCtrl.username = ""
-                        loginCtrl.password = ""
-                    }
-                    else {
-                        alert("Internal error.");
-                    }
-                });
-            // $route.reload()
-
-        };
 
 
         this.like = function (post_id) {
@@ -283,7 +304,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                 });
 
-          //  $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
+            //  $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
 
         };
         this.reloadPage = function () {
@@ -328,7 +349,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                 });
 
-         //   $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.membersList));
+            //   $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.membersList));
 
 
         };
