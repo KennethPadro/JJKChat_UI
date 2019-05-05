@@ -35,9 +35,6 @@
                         View/Add Contacts
                     </md-collapsible-header>
                     <md-collapsible-body>
-                        <!--<ul class="collection">-->
-                        <!--<li ng-repeat="user in chatCtrl.membersList" class="collection-item">{{user.first_name}} {{user.last_name}}<a type="submit" name="action" ng-click="chatCtrl.removeMember(user.user_id)" class="secondary-content"><i class="material-icons">delete</i></a></li>-->
-                        <!--</ul>-->
                         <div>
                             <div class="row">
                                 <div class="col s12">
@@ -48,7 +45,6 @@
                                             <p>{{c.username}} <br>
                                                 {{c.phone}}
                                             </p>
-                                            <!--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
                                             <a type="submit" name="action" ng-click="chatCtrl.addMember(c.user_id)" class="secondary-content"><i class="material-icons">group_add</i></a>
                                         </li>
                                     </ul>
@@ -65,28 +61,21 @@
         <div class="col s12">
             <div class="card cyan">
                 <div class="card-content ">
-                    <!--<i class="material-icons prefix" style="color: white">mode_edit</i>-->
-                    <!--<span text-white style="font-size:larger; color:white">Message:</span>-->
-                    <!--<textarea style="background: white" id="textfield" class="materialize-textarea" ng-model="chatCtrl.newText"></textarea>-->
-                    <!--<form method=post enctype=multipart/form-data>-->
-                    <!--<input type=file name=file>-->
-                    <!--<input type=submit value=Upload>-->
-                    <!--</form>-->
                     <form name="myForm">
-                            <i class="material-icons prefix" style="color: white">mode_edit</i>
-                            <span text-white style="font-size:larger; color:white">Message:</span>
+                        <i class="material-icons prefix" style="color: white">mode_edit</i>
+                        <span text-white style="font-size:larger; color:white">Message:</span>
 
-                            <input style="background: white" type="text" class="materialize-textarea" name="message" ng-model="message" size="31" required>
-                            <br>Photo:
-                            <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
-                            <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
-                            <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
-                            <br>
-                            <span class="progress" ng-show="picFile.progress >= 0">
+                        <input style="background: white" type="text" class="materialize-textarea" name="message" ng-model="message" size="31" required>
+                        <br>Photo:
+                        <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
+                        <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+                        <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+                        <br>
+                        <span class="progress" ng-show="picFile.progress >= 0">
                             <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
-                             </span>
-                            <span ng-show="picFile.result">Upload Successful</span>
-                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                        </span>
+                        <span ng-show="picFile.result">Upload Successful</span>
+                        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
                         <br>
                     </form>
                     </body>
