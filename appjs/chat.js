@@ -152,10 +152,10 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         };
 
 
-        this.like = function (pID) {
+        this.like = function (post_id) {
             var data = {};
-            data.user_id = pID;
-            data.post_id = pID;
+            data.user_id = thisCtrl.pID;
+            data.post_id = post_id;
             console.log("response: " + JSON.stringify(data));
             $http({
                 url: 'http://127.0.0.1:5000/JJKChat/post/like',
@@ -173,7 +173,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     // Copy the list of parts in the data variable
                     // into the list of parts in the controller.
 
-                    console.log("response: " + JSON.stringify(response));
+                    console.log("response: " + JSON.stringify(response.data));
 
                 }, // error callback
                 function (response) {
@@ -190,6 +190,9 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     else if (status === 404) {
                         alert("Not found");
                     }
+                    else if (status === 777) {
+                            alert("Already reacted to this post");
+                    }
                     else {
                         alert("Internal error.");
                     }
@@ -197,10 +200,10 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             //$route.reload()
         };
 
-        this.dislike = function (pID) {
+        this.dislike = function (post_id) {
             var data = {};
-            data.user_id = pID;
-            data.post_id = pID;
+            data.user_id = thisCtrl.pID;
+            data.post_id = post_id;
             console.log("response: " + JSON.stringify(data));
             $http({
                 url: 'http://127.0.0.1:5000/JJKChat/post/dislike',
@@ -234,6 +237,9 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                     else if (status === 404) {
                         alert("Not found");
+                    }
+                    else if (status === 777) {
+                        alert("Already reacted to this post");
                     }
                     else {
                         alert("Internal error.");
