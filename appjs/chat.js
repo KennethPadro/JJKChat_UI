@@ -158,7 +158,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             data.post_id = post_id;
             console.log("response: " + JSON.stringify(data));
             $http({
-                url: 'http://127.0.0.1:5000/JJKChat/post/like',
+                url: "http://127.0.0.1:5000/JJKChat/post/" + post_id + "/likes",
                 dataType: 'json',
                 method: 'POST',
                 data: JSON.stringify(data),
@@ -206,7 +206,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             data.post_id = post_id;
             console.log("response: " + JSON.stringify(data));
             $http({
-                url: 'http://127.0.0.1:5000/JJKChat/post/dislike',
+                url: "http://127.0.0.1:5000/JJKChat/post/" + post_id + "/dislikes",
                 dataType: 'json',
                 method: 'POST',
                 data: JSON.stringify(data),
