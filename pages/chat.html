@@ -68,10 +68,24 @@
                     <i class="material-icons prefix" style="color: white">mode_edit</i>
                     <span text-white style="font-size:larger; color:white">Message:</span>
                     <textarea style="background: white" id="textfield" class="materialize-textarea" ng-model="chatCtrl.newText"></textarea>
-                    <form method=post enctype=multipart/form-data>
-                        <input type=file name=file>
-                        <input type=submit value=Upload>
-                    </form>
+                    <!--<form method=post enctype=multipart/form-data>-->
+                        <!--<input type=file name=file>-->
+                        <!--<input type=submit value=Upload>-->
+                    <!--</form>-->
+                    <h4>Upload on file select</h4>
+                    <button type="file" ngf-select="uploadFiles($file, $invalidFiles)"
+                            accept="image/*" >
+                        Select File</button>
+                    <br><br>
+                    File:
+                    <div >{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+                        <span class="progress" ng-show="f.progress >= 0">
+          <div style="width:{{f.progress}}%"
+               ng-bind="f.progress + '%'"></div>
+      </span>
+                    </div>
+                    {{errorMsg}}
+
                 </div>
                 <div class="card-action white">
 

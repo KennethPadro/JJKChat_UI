@@ -1,5 +1,5 @@
-angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope', '$location', '$route', '$routeParams', '$localStorage',
-    function ($http, $log, $scope, $location, $route, $routeParams, $localStorage) {
+angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope', '$location', '$route', '$routeParams', '$localStorage','Upload','$timeout',
+    function ($http, $log, $scope, $location, $route, $routeParams, $localStorage, Upload,$timeout) {
         var thisCtrl = this;
         this.gID = $routeParams.gID;
         this.pID = $localStorage.pID;
@@ -11,6 +11,29 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.newText = "";
         this.newText2 ="";
         this.message = "";
+
+        $scope.uploadFiles = function(file, errFiles) {
+            $scope.f = file;
+            $scope.errFile = errFiles && errFiles[0];
+            if (file) {
+                file.upload = Upload.upload({
+                    url: 'http://127.0.0.1:5000/JJKChat/upload',
+                    data: {file: file}
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        file.result = response.data;
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    file.progress = Math.min(100, parseInt(100.0 *
+                        evt.loaded / evt.total));
+                });
+            }
+        };
 
         this.loadMessages = function () {
 
@@ -44,7 +67,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                 });
 
-         //  $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
+            //  $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
         };
 
         this.loadMessages();
@@ -277,7 +300,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                 });
 
-          //  $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
+            //  $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.messageList));
 
         };
         this.reloadPage = function () {
@@ -322,7 +345,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                 });
 
-         //   $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.membersList));
+            //   $log.error("Messages Loaded: ", JSON.stringify(thisCtrl.membersList));
 
 
         };
