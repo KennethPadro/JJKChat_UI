@@ -5,11 +5,53 @@
                 <!--<button class="btn waves-effect cyan waves-light " type="submit" name="action" ng-click="groupsCtrl.logOut()">Log Out-->
                     <!--<i class="material-icons right">send</i>-->
                 <!--</button>-->
-                <a href="#!/allGroups" class=" cyan btn btn-link">View All Groups</a>
+                <a href="#!/allGroups" class=" cyan btn btn-link">Go Back</a>
             </div>
         </div>
     </div>
-    <div>
+    <div class="row">
+        <div class="col s12">
+            <md-collapsible class="md-accordion">
+                <md-collapsible-item>
+                    <md-collapsible-header layout="row">
+                        Add contact
+                    </md-collapsible-header>
+                    <md-collapsible-body>
+                        <div class="row">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input  ng-model="contactsCtrl.first_name" name="first_name" id="first_name" type="text" class="validate">
+                                    <label for="first_name">First Name</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input  ng-model="contactsCtrl.last_name" name="last_name" id="last_name" type="text" class="validate">
+                                    <label for="last_name">Last Name</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input  ng-model="contactsCtrl.phone" name="phone" id="phone" type="text" class="validate">
+                                    <label for="phone">Phone Number</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input  ng-model="contactsCtrl.email" name="email" id="email" type="text" class="validate">
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+
+
+                            <div class="form-actions">
+                                <button class="btn cyan waves-effect waves-light " type="submit" name="action" ng-click="contactsCtrl.addContact()">Add Contact
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                            </form>
+                        </div>
+                    </md-collapsible-body>
+                </md-collapsible-item>
+            </md-collapsible>
+        </div>
+    </div>
         <div class="row">
             <div class="col s12">
                 <ul class="collection">
