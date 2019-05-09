@@ -420,6 +420,12 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
         };
         this.loadTrendingTopics();
 
+        
+        thisCtrl.enteredPID = "";
+
+        
+
+
 
         this.logOut = function() {
             delete $localStorage.pID;
