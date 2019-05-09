@@ -9,9 +9,10 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
             console.log('Checking PID');
             if ($localStorage.pID !== undefined) {
                 console.log('pID Defined');
-                $location.url('/allGroups');
+                $location.url('/chatGroups');
             }
         }
+
         this.login = function () {
             var post = new Object();
             post.username = loginCtrl.username;
@@ -32,7 +33,7 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
                     if (this.userDetails.authenticated) {
                         $localStorage.pID = this.userDetails.user_id;
                         //$window.location.href = '/allGroups';
-                        $location.url('/allGroups');
+                        $location.url('/chatGroups');
 
                     } else {
                         alert("Wrong Credentials");
@@ -40,7 +41,6 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
                         loginCtrl.password = ""
 
                     }
-
                 },
                 function (response) {
                     var status = response.status;

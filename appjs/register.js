@@ -1,8 +1,6 @@
 angular.module('AppChat').controller('RegisterController', ['$http', '$log', '$scope', '$location', '$window',
-    function ($http, $log, $scope, $location, $window) {
+    function ($http, $log, $scope, $location) {
         var registerCtrl = this;
-
-
 
         this.register = function () {
             var postObject = new Object();
@@ -22,16 +20,12 @@ angular.module('AppChat').controller('RegisterController', ['$http', '$log', '$s
                 headers: {
                     "Content-Type": "application/json"
                 }
-            }).then(// success call back
+            }).then(
                 function (response) {
-                    // The is the sucess function!
-                    // Copy the list of parts in the data variable
-                    // into the list of parts in the controller.
-                    //$window.location.href = '/#!/login';
                     console.log("response: " + JSON.stringify(response));
                     $location.url("/login")
-                    //$location.url('/allGroups');
-                }, // error callback
+
+                },
                 function (response) {
                     var status = response.status;
                     if (status === 0) {

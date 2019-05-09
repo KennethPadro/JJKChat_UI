@@ -12,17 +12,12 @@ angular.module('AppChat').controller('ReplyController', ['$http', '$log', '$scop
 
             var url = "http://127.0.0.1:5000/JJKChatChatApp/message/" + this.originalMessageID;
 
-            // Now set up the $http object
-            // It has two function call backs, one for success and one for error
-            $http.get(url).then(// success call back
+            $http.get(url).then(
                 function (response) {
-                    // The is the sucess function!
-                    // Copy the list of parts in the data variable
-                    // into the list of parts in the controller.
                     console.log(response.data.Messages.mText);
                     thisCtrl.originalMessageText = response.data.Messages.mText;
 
-                }, // error callback
+                },
                 function (response) {
                     var status = response.status;
                     if (status === 0) {
@@ -62,9 +57,6 @@ angular.module('AppChat').controller('ReplyController', ['$http', '$log', '$scop
 
             }).then(// success call back
                 function (response) {
-                    // The is the sucess function!
-                    // Copy the list of parts in the data variable
-                    // into the list of parts in the controller.
 
                     console.log("response: " + JSON.stringify(response));
 

@@ -1,6 +1,7 @@
 angular.module('AppChat').controller('AllChatGroupsController', ['$http', '$log', '$scope', '$location', '$route', '$routeParams', '$localStorage',
     function ($http, $log, $scope, $location, $route, $routeParams, $localStorage) {
         var thisCtrl = this;
+
         this.pID = $localStorage.pID;
 
         this.groupList = [];
@@ -39,7 +40,8 @@ angular.module('AppChat').controller('AllChatGroupsController', ['$http', '$log'
 
         this.enterGroup = function (gID) {
             $location.url('/chat/' + gID);
-        }
+        };
+
         this.join = function (gID) {
             var url = "http://127.0.0.1:5000/JJKChat/ChatApp/group/" + gID + "/person/" + thisCtrl.pID;
 
@@ -69,11 +71,11 @@ angular.module('AppChat').controller('AllChatGroupsController', ['$http', '$log'
                     }
                 });
             $route.reload()
-        }
+        };
 
         this.logOut = function () {
             delete $localStorage.pID;
             $location.url('/login');
-        }
+        };
 
     }]);
