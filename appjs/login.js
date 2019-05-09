@@ -34,9 +34,11 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
                         $localStorage.pID = this.userDetails.user_id;
                         //$window.location.href = '/allGroups';
                         $location.url('/chatGroups');
+                        M.toast({html: 'Welcome Back! ' + loginCtrl.username, classes: 'rounded green pulse z-depth-3'});
+
 
                     } else {
-                        alert("Wrong Credentials");
+                        M.toast({html: 'Wrong Credentials. Try again', classes: 'rounded red pulse z-depth-3'});
                         loginCtrl.username = ""
                         loginCtrl.password = ""
 

@@ -13,10 +13,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
 
             $http.get(url).then(
                 function (response) {
-
-
                     console.log("response: " + JSON.stringify(response));
-
                     thisCtrl.groupList = response.data;
                     console.log(thisCtrl.groupList)
 
@@ -33,6 +30,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
                         alert("Not authorized");
                     }
                     else if (status === 404) {
+                        M.toast({html: 'You lonely f.ck, get some friends and ask them to add you.', classes: 'rounded blue pulse z-depth-3 '});
                     }
                     else {
                         alert("Internal error.");
@@ -65,6 +63,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
                         alert("Not authorized");
                     }
                     else if (status === 404) {
+                        M.toast({html: 'You own no group :( but you can create one!', classes: 'rounded blue pulse z-depth-3 '});
                     }
                     else {
                         alert("Internal error.");
@@ -91,6 +90,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
             }).then(
                 function (response) {
                     console.log("User: " + JSON.stringify(response.data));
+                    M.toast({html: 'You have created a group, oh almighty being.', classes: 'rounded green pulse z-depth-3 '});
 
                 },
                 function (response) {

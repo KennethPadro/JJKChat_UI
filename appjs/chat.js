@@ -109,13 +109,12 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                         alert("Not found");
                     }
                     else if (status === 777) {
-                            alert("Already reacted to this post");
+                        M.toast({html: 'Already reacted to this post' , classes: 'rounded yellow pulse z-depth-3'});
                     }
                     else {
                         alert("Internal error.");
                     }
                 });
-            $route.reload()
         };
 
         this.dislike = function (post_id) {
@@ -157,7 +156,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                         alert("Not found");
                     }
                     else if (status === 777) {
-                        alert("Already reacted to this post");
+                        M.toast({html: 'Already reacted to this post' , classes: 'rounded yellow pulse z-depth-3'});
                     }
                     else {
                         alert("Internal error.");
@@ -331,7 +330,6 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                         alert("Not authorized");
                     }
                     else if (status === 404) {
-                        alert("Not found");
                     }
                     else {
                         alert("Internal error.");
@@ -355,7 +353,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             }).then(
                 function (response) {
                     console.log("User: " + JSON.stringify(response.data));
-
+                    M.toast({html: 'Contact added to group', classes: 'rounded green pulse z-depth-3 '});
                 },
                 function (response) {
                     var status = response.status;
@@ -370,8 +368,6 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                     else if (status === 404) {
                         alert("User not found");
-                        loginCtrl.username = ""
-                        loginCtrl.password = ""
                     }
                     else {
                         alert("Internal error.");
