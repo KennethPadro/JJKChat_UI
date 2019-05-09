@@ -1,6 +1,7 @@
 angular.module('AppChat').controller('AllPostsController', ['$http', '$log', '$scope', '$location', '$route', '$routeParams', '$localStorage',
     function ($http, $log, $scope, $location, $route, $routeParams, $localStorage) {
         var thisCtrl = this;
+
         // this.pID = $localStorage.pID;
 
         this.postsLists = [];
@@ -41,13 +42,11 @@ angular.module('AppChat').controller('AllPostsController', ['$http', '$log', '$s
         };
 
 
-
         this.loadGroups();
 
         this.getReactions = function (pID) {
 
             var url = "http://127.0.0.1:5000/JJKChat/dislikes/"+ pID + "/count";
-
 
             $http.get(url).then(
                 function (response) {
@@ -77,12 +76,12 @@ angular.module('AppChat').controller('AllPostsController', ['$http', '$log', '$s
                         alert("Internal error.");
                     }
                 });
-
         };
 
         this.enterGroup = function (gID) {
             $location.url('/chat/' + gID);
-        }
+        };
+
         this.join = function (gID) {
             var url = "http://127.0.0.1:5000/JJKChat/ChatApp/group/" + gID + "/person/" + thisCtrl.pID;
 
@@ -112,7 +111,7 @@ angular.module('AppChat').controller('AllPostsController', ['$http', '$log', '$s
                     }
                 });
             $route.reload()
-        }
+        };
 
         this.logOut = function () {
             delete $localStorage.pID;

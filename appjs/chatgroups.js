@@ -1,6 +1,6 @@
 angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '$scope', '$location', '$route', '$routeParams', '$localStorage',
     function ($http, $log, $scope, $location, $route, $routeParams, $localStorage) {
-        
+
         var thisCtrl = this;
         this.pID = $localStorage.pID;
 
@@ -10,7 +10,6 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
         this.loadGroups = function () {
 
             var url = "http://127.0.0.1:5000/JJKChat/user/"+ thisCtrl.pID + "/member";
-
 
             $http.get(url).then(
                 function (response) {
@@ -34,13 +33,11 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
                         alert("Not authorized");
                     }
                     else if (status === 404) {
-                        alert("Not found");
                     }
                     else {
                         alert("Internal error.");
                     }
                 });
-
         };
 
         this.loadGroups();
@@ -48,12 +45,8 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
         this.loadGroups2 = function () {
 
             var url = "http://127.0.0.1:5000/JJKChat/user/"+ thisCtrl.pID +"/ownedgroups";
-
-
             $http.get(url).then(
                 function (response) {
-
-
                     console.log("response: " + JSON.stringify(response));
 
                     thisCtrl.groupList2 = response.data;
@@ -72,7 +65,6 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
                         alert("Not authorized");
                     }
                     else if (status === 404) {
-                        alert("Not found");
                     }
                     else {
                         alert("Internal error.");
@@ -80,6 +72,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
                 });
 
         };
+
         this.loadGroups2();
 
         this.createGroup = function () {
@@ -112,9 +105,6 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
                         alert("Not authorized");
                     }
                     else if (status === 404) {
-                        alert("User not found");
-                        loginCtrl.username = ""
-                        loginCtrl.password = ""
                     }
                     else {
                         alert("Internal error.");
@@ -168,40 +158,24 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
 
         this.enterGroup = function (gID) {
             $location.url('/chat/' + gID);
-        }
-        this.joinGroup = function () {
-            var url = "http://127.0.0.1:5000/JJKChat/ChatApp/group/" + thisCtrl.groupToJoin + "/person/" + thisCtrl.pID;
+        };
 
-
-            $http.post(url).then(
-                function (response) {
-
-                    console.log("response: " + JSON.stringify(response));
-
-                },
-                function (response) {
-                    var status = response.status;
-                    if (status === 0) {
-                        alert("No internet connection");
-                    }
-                    else if (status === 401) {
-                        alert("Your session expired. Login again");
-                    }
-                    else if (status === 403) {
-                        alert("Not authorized");
-                    }
-                    else if (status === 404) {
-                        alert("Not found");
-                    }
-                    else {
-                        alert("Internal error.");
-                    }
-                });
-            $route.reload()
-        }
         this.logOut = function () {
             delete $localStorage.pID;
             $location.url('/login');
-        }
+        };
 
+        this.checkLogin = function () {
+            console.log('Checking PID');
+            if ($localStorage.pID !== undefined) {
+                console.log('pID Defined');
+                $location.url('/chatGroups');
+            }
+            else
+            {
+                $location.url('/login');
+            }
+        };
+
+        this.checkLogin();
     }]);
