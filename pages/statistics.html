@@ -134,7 +134,10 @@
             <div class="row m-b-1">
                 <div class="col-lx-12">
                     <div class="card shadow">
-                        <h4 class="card-header">Post per day by user</h4>
+                        <h4 class="card-header">Post per day by user
+                        <textarea style="background: white" id="textfield2" class="materialize-textarea" ng-model="StatsCtrl.enteredUID"></textarea>
+                        <button class="btn waves-effect cyan " type="submit" name="action" ng-click="StatsCtrl.loadPostPerDayByUser()">Send
+                        </h4>
                         <div class="card-block">
                             <div id="post-per-day-by-user"></div>
                         </div>
@@ -161,7 +164,9 @@
             <div class="row m-b-1">
                 <div class="col-lg-6">
                     <div class="card shadow">
-                        <h4 class="card-header">Likes per day</h4>
+                        <h4 class="card-header">Likes per day
+
+                        </h4>
                         <div class="card-block">
                             <div id="likes-per-day"></div>
                         </div>

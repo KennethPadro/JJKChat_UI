@@ -271,32 +271,67 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
 
         this.loadDislikesPerDay();
 
-        
 
-        this.postPerDayByUserDataPoints = [];
+
+
+        thisCtrl.enteredUID = "";
+
 
         this.loadPostPerDayByUser = function() {
 
-            var url = "http://127.0.0.1:5000/JJKChat/dislikes/count";
+            var url = "http://127.0.0.1:5000/JJKChat/user/"+thisCtrl.enteredUID+"/postsperday";
 
             $http.get(url).then(
                 function(response) {
+                    postPerDayByUserDataPoints = [];
 
-                    console.log("Entre aqui");
+                    console.log("Cleaning thisCtrl.postPerDayByUserDataPoints");
+                    console.log("Before call: " + postPerDayByUserDataPoints);
 
                     var data = response.data;
 
                     console.log("response: " + JSON.stringify(response));
                     for (var i = 0; i < data.length; i++) {
-                        thisCtrl.postPerDayByUserDataPoints.push({
+                        postPerDayByUserDataPoints.push({
                             x: new Date(data[i].day),
                             y: data[i].total
                         });
 
                     }
-                    console.log(thisCtrl.postPerDayByUserDataPoints);
+                    console.log("After Call: " + postPerDayByUserDataPoints);
+
+                    var postPerDayByUserchart = new CanvasJS.Chart("post-per-day-by-user");
+
+                    postPerDayByUserchart.options.animationEnabled= true;
+                    postPerDayByUserchart.options.theme = "light2";
+                    postPerDayByUserchart.options.backgroundColor= "transparent";
+
+
+                    postPerDayByUserchart.options.axisY = {
+                        title: "Number of post",
+                        titleFontSize: 24
+                    };
+
+                    postPerDayByUserchart.options.toolTip = {
+                        borderThickness: 0,
+                        cornerRadius: 0
+                    };
+
+                    var series1 = {
+                        type: "spline",
+                        yValueFormatString: "###,### posts",
+                    };
+
+                    postPerDayByUserchart.options.data = [];
+
+                    postPerDayByUserchart.options.data.push(series1);
+
+                    series1.dataPoints = postPerDayByUserDataPoints;
+
 
                     postPerDayByUserchart.render();
+
+
                 },
                 function(response) {
                     var status = response.status;
@@ -315,6 +350,7 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
 
         };
 
+        /**
         var postPerDayByUserchart = new CanvasJS.Chart("post-per-day-by-user", {
             animationEnabled: true,
             theme: "light2",
@@ -333,11 +369,12 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
             data: [{
                 type: "spline",
                 yValueFormatString: "###,### posts",
-                dataPoints: this.postPerDayByUserDataPoints
+                dataPoints: thisCtrl.postPerDayByUserDataPoints
             }]
         });
+        **/
 
-        this.loadPostPerDayByUser();
+        //this.loadPostPerDayByUser(3);
 
 
 
