@@ -6,6 +6,11 @@ angular.module('AppChat').controller('ContactsController', ['$http', '$log', '$s
         this.contactsList = [];
         this.groupList2 = [];
 
+        this.first_name = "";
+        this.last_name="";
+        this.email="";
+        this.phone="";
+
         this.loadContacts = function () {
 
             var url = "http://127.0.0.1:5000/JJKChat/user/" + thisCtrl.pID + "/contact";
@@ -44,19 +49,25 @@ angular.module('AppChat').controller('ContactsController', ['$http', '$log', '$s
 
         this.loadContacts();
 
-        this.loadGroups2 = function () {
 
-            var url = "http://127.0.0.1:5000/JJKChat/user/"+ thisCtrl.pID +"/ownedgroups";
+        this.addContact = function () {
+            var post = new Object();
+            post.first_name = thisCtrl.first_name;
+            post.last_name = thisCtrl.last_name;
+            post.email = thisCtrl.email;
+            post.phone = thisCtrl.phone;
 
-
-            $http.get(url).then(
+            $http({
+                url: "http://127.0.0.1:5000/JJKChat/user/" + thisCtrl.pID + "/contact",
+                dataType: 'json',
+                method: 'POST',
+                data: post,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(
                 function (response) {
-
-
-                    console.log("response: " + JSON.stringify(response));
-
-                    thisCtrl.groupList2 = response.data;
-                    console.log(thisCtrl.groupList2)
+                    console.log("User: " + JSON.stringify(response.data));
 
                 },
                 function (response) {
@@ -71,50 +82,17 @@ angular.module('AppChat').controller('ContactsController', ['$http', '$log', '$s
                         alert("Not authorized");
                     }
                     else if (status === 404) {
-                        alert("Not found");
+                        alert("User not found");
                     }
                     else {
                         alert("Internal error.");
                     }
                 });
+            // $route.reload()
 
         };
 
-        this.loadGroups2();
 
-        this.enterGroup = function (gID) {
-            $location.url('/chat/' + gID);
-        }
-        this.joinGroup = function () {
-            var url = "http://127.0.0.1:5000/JJKChat/ChatApp/group/" + thisCtrl.groupToJoin + "/person/" + thisCtrl.pID;
-
-
-            $http.post(url).then(
-                function (response) {
-
-                    console.log("response: " + JSON.stringify(response));
-
-                },
-                function (response) {
-                    var status = response.status;
-                    if (status === 0) {
-                        alert("No internet connection");
-                    }
-                    else if (status === 401) {
-                        alert("Your session expired. Login again");
-                    }
-                    else if (status === 403) {
-                        alert("Not authorized");
-                    }
-                    else if (status === 404) {
-                        alert("Not found");
-                    }
-                    else {
-                        alert("Internal error.");
-                    }
-                });
-            $route.reload()
-        }
         this.logOut = function () {
             delete $localStorage.pID;
             $location.url('/login');
