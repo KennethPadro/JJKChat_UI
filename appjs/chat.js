@@ -14,7 +14,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         $scope.uploadPic = function(file) {
             file.upload = Upload.upload({
-                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post",
+                url: "https://jjkchat-api.herokuapp.com/JJKChat/group/" + thisCtrl.gID + "/post",
                 data: {user_id: thisCtrl.pID, message: $scope.message, file: file},
             });
 
@@ -35,7 +35,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         this.loadMessages = function () {
 
-            var url = "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/detailedpost";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/group/" + thisCtrl.gID + "/detailedpost";
 
 
             $http.get(url).then(
@@ -76,7 +76,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             data.post_id = post_id;
             console.log("response: " + JSON.stringify(data));
             $http({
-                url: "http://127.0.0.1:5000/JJKChat/post/" + post_id + "/likes",
+                url: "https://jjkchat-api.herokuapp.com/JJKChat/post/" + post_id + "/likes",
                 dataType: 'json',
                 method: 'POST',
                 data: JSON.stringify(data),
@@ -123,7 +123,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             data.post_id = post_id;
             console.log("response: " + JSON.stringify(data));
             $http({
-                url: "http://127.0.0.1:5000/JJKChat/post/" + post_id + "/dislikes",
+                url: "https://jjkchat-api.herokuapp.com/JJKChat/post/" + post_id + "/dislikes",
                 dataType: 'json',
                 method: 'POST',
                 data: JSON.stringify(data),
@@ -173,7 +173,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         ///Added by Jesi
         this.viewMembers = function(){
-            var url = "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/members";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/group/" + thisCtrl.gID + "/members";
 
 
             // Now set up the $http object
@@ -216,7 +216,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             post.user_id = user_id;
             console.log("User: " + JSON.stringify(user_id));
             $http({
-                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/members",
+                url: "https://jjkchat-api.herokuapp.com/JJKChat/group/" + thisCtrl.gID + "/members",
                 dataType: 'json',
                 method: 'DELETE',
                 data: post,
@@ -261,7 +261,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             post.user_id = thisCtrl.pID;
             post.reply_message = thisCtrl.newText2;
             $http({
-                url: "http://127.0.0.1:5000/JJKChat/post/" + post_id + "/replies",
+                url: "https://jjkchat-api.herokuapp.com/JJKChat/post/" + post_id + "/replies",
                 dataType: 'json',
                 method: 'POST',
                 data: post,
@@ -305,7 +305,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         this.loadContacts = function () {
 
-            var url = "http://127.0.0.1:5000/JJKChat/user/" + thisCtrl.pID + "/contact";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/user/" + thisCtrl.pID + "/contact";
 
 
             $http.get(url).then(
@@ -343,7 +343,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             post.user_id = user_id;
             console.log("User: " + JSON.stringify(user_id));
             $http({
-                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/members",
+                url: "https://jjkchat-api.herokuapp.com/JJKChat/group/" + thisCtrl.gID + "/members",
                 dataType: 'json',
                 method: 'POST',
                 data: post,

@@ -19,7 +19,7 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
             post.password = loginCtrl.password;
 
             $http({
-                url: 'http://127.0.0.1:5000/JJKChat/login',
+                url: 'https://jjkchat-api.herokuapp.com/JJKChat/login',
                 dataType: 'json',
                 method: 'POST',
                 data: post,

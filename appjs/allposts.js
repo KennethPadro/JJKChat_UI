@@ -8,7 +8,7 @@ angular.module('AppChat').controller('AllPostsController', ['$http', '$log', '$s
 
         this.loadGroups = function () {
 
-            var url = "http://127.0.0.1:5000/JJKChat/post";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/post";
 
 
             $http.get(url).then(
@@ -46,7 +46,7 @@ angular.module('AppChat').controller('AllPostsController', ['$http', '$log', '$s
 
         this.getReactions = function (pID) {
 
-            var url = "http://127.0.0.1:5000/JJKChat/dislikes/"+ pID + "/count";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/dislikes/"+ pID + "/count";
 
             $http.get(url).then(
                 function (response) {
@@ -83,7 +83,7 @@ angular.module('AppChat').controller('AllPostsController', ['$http', '$log', '$s
         };
 
         this.join = function (gID) {
-            var url = "http://127.0.0.1:5000/JJKChat/ChatApp/group/" + gID + "/person/" + thisCtrl.pID;
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/ChatApp/group/" + gID + "/person/" + thisCtrl.pID;
 
 
             $http.post(url).then(// success call back

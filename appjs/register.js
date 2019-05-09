@@ -13,7 +13,7 @@ angular.module('AppChat').controller('RegisterController', ['$http', '$log', '$s
             console.log(postObject);
             $http({
 
-                url: "http://127.0.0.1:5000/JJKChat/register",
+                url: "https://jjkchat-api.herokuapp.com/JJKChat/register",
                 dataType: 'json',
                 method: 'POST',
                 data: postObject,

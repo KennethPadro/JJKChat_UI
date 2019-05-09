@@ -21,7 +21,7 @@ angular.module('AppChat').controller('ReactDetailsController', ['$http', '$log',
 
             // Now create the url with the route to talk with the rest API
 
-            var likesReqURL = "http://127.0.0.1:5000/JJKChat/post/" + messageID + "/likes";
+            var likesReqURL = "https://jjkchat-api.herokuapp.com/JJKChat/post/" + messageID + "/likes";
 
 
             // Now issue the http request to the rest API
@@ -57,7 +57,7 @@ angular.module('AppChat').controller('ReactDetailsController', ['$http', '$log',
             var messageID = $routeParams.mID;
 
             // Now create the url with the route to talk with the rest API
-            var dislikesReqURL = "http://127.0.0.1:5000/JJKChat/post/" + messageID + "/dislikes";
+            var dislikesReqURL = "https://jjkchat-api.herokuapp.com/JJKChat/post/" + messageID + "/dislikes";
             // Now issue the http request to the rest API
             $http.get(dislikesReqURL).then(
                 // Success function
