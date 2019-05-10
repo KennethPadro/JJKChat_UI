@@ -23,7 +23,9 @@ angular.module('AppChat').controller('RegisterController', ['$http', '$log', '$s
             }).then(
                 function (response) {
                     console.log("response: " + JSON.stringify(response));
+                    M.toast({html: 'Account created, please log in! ', classes: 'rounded green pulse z-depth-3 '});
                     $location.url("/login")
+
 
                 },
                 function (response) {
