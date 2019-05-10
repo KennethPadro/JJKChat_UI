@@ -423,7 +423,124 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
         
         thisCtrl.enteredPID = "";
 
+        thisCtrl.numLikes = "";
+        thisCtrl.numDislikes = "";
+        thisCtrl.numReplies = "";
+
+        thisCtrl.likesData = [];
+
+        this.loadStats = function() {
+            this.loadLikes();
+            this.loadDislikes();
+            this.loadReplies();
+        }
+
         
+        this.loadLikes = function () {
+            var url = "http://127.0.0.1:5000/JJKChat/post/" + thisCtrl.enteredPID +"/likes/count";
+
+
+            $http.get(url).then(
+                function (response) {
+                    console.log("response: " + JSON.stringify(response.data));
+
+                    thisCtrl.likesData = response.data;
+                    thisCtrl.numLikes = "Number of Likes: " + thisCtrl.likesData["reactions"];
+
+                },
+                function (response) {
+                    console.log("Entre en error");
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    }
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    }
+                    else if (status === 403) {
+                        alert("Not authorized");
+                    }
+                    else if (status === 404) {
+                        alert("Not found");
+                    }
+                    else {
+                        alert("Internal error.");
+                    }
+                });
+        };
+
+        thisCtrl.dislikesData = [];
+
+
+        this.loadDislikes = function () {
+            var url = "http://127.0.0.1:5000/JJKChat/post/" + thisCtrl.enteredPID +"/dislikes/count";
+
+
+            $http.get(url).then(
+                function (response) {
+                    console.log("response: " + JSON.stringify(response.data));
+
+                    thisCtrl.dislikesData = response.data;
+                    thisCtrl.numDisLikes = "Number of Likes: " + thisCtrl.dislikesData["reactions"];
+
+                },
+                function (response) {
+                    console.log("Entre en error");
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    }
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    }
+                    else if (status === 403) {
+                        alert("Not authorized");
+                    }
+                    else if (status === 404) {
+                        alert("Not found");
+                    }
+                    else {
+                        alert("Internal error.");
+                    }
+                });
+        };
+        
+        thisCtrl.repliesData = [];
+        thisCtrl.numReplies = "";
+
+        this.loadReplies = function () {
+            var url = "http://127.0.0.1:5000/JJKChat/replies/" +thisCtrl.enteredPID +"/count";
+
+
+            $http.get(url).then(
+                function (response) {
+                    console.log("response: " + JSON.stringify(response.data));
+
+                    thisCtrl.repliesData = response.data;
+                    thisCtrl.numReplies = "Number of Likes: " + thisCtrl.repliesData["reactions"];
+
+                },
+                function (response) {
+                    console.log("Entre en error");
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    }
+                    else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    }
+                    else if (status === 403) {
+                        alert("Not authorized");
+                    }
+                    else if (status === 404) {
+                        alert("Not found");
+                    }
+                    else {
+                        alert("Internal error.");
+                    }
+                });
+        };
+
 
 
 
