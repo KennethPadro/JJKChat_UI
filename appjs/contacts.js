@@ -40,6 +40,9 @@ angular.module('AppChat').controller('ContactsController', ['$http', '$log', '$s
                     else if (status === 404) {
                         alert("Not found");
                     }
+                    else if (status === 777) {
+                        M.toast({html: 'You have no contacts yet! Add one ', classes: 'rounded blue pulse z-depth-3 '});
+                    }
                     else {
                         alert("Internal error.");
                     }
@@ -68,7 +71,7 @@ angular.module('AppChat').controller('ContactsController', ['$http', '$log', '$s
             }).then(
                 function (response) {
                     console.log("User: " + JSON.stringify(response.data));
-
+                    M.toast({html: 'Contact added!', classes: 'rounded green pulse z-depth-3 '});
                 },
                 function (response) {
                     var status = response.status;
@@ -82,7 +85,7 @@ angular.module('AppChat').controller('ContactsController', ['$http', '$log', '$s
                         alert("Not authorized");
                     }
                     else if (status === 404) {
-                        alert("User not found");
+                        M.toast({html: 'Contact not found!', classes: 'rounded red pulse z-depth-3 '});
                     }
                     else {
                         alert("Internal error.");

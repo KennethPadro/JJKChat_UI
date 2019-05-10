@@ -32,10 +32,6 @@
             templateUrl: 'pages/register.html',
             controller: 'RegisterController',
             controllerAs: 'registerCtrl'
-        }).when('/replyToMessage/:mID/:gID', {
-            templateUrl: 'pages/replyToMessage.html',
-            controller: 'ReplyController',
-            controllerAs: 'replyCtrl'
         }).when('/allPosts', {
             templateUrl: 'pages/allposts.html',
             controller: 'AllPostsController',
