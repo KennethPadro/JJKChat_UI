@@ -136,10 +136,11 @@
                     <div class="card shadow">
                         <h4 class="card-header">Post per day by user
                         <textarea style="background: white" id="textfield2" class="materialize-textarea" ng-model="StatsCtrl.enteredUID"></textarea>
-                        <button class="btn waves-effect cyan " type="submit" name="action" ng-click="StatsCtrl.loadPostPerDayByUser()">Send
+                        <button class="btn waves-effect cyan " type="submit" name="action" ng-click="StatsCtrl.loadPostPerDayByUser()">Submit
                         </h4>
                         <div class="card-block">
                             <div id="post-per-day-by-user"></div>
+
                         </div>
                     </div>
                 </div>
@@ -162,24 +163,19 @@
     </div>
             <!-- row -->
             <div class="row m-b-1">
-                <div class="col-lg-6">
-                    <div class="card shadow">
-                        <h4 class="card-header">Likes per day
-
+                <div class="card shadow">
+                        <h4 class="card-header">Stats for Post
+                        <textarea style="background: white" id="textfield2" class="materialize-textarea" ng-model="StatsCtrl.enteredPID"></textarea>
+                        <button class="btn waves-effect cyan " type="submit" name="action" ng-click="StatsCtrl.loadStats()">Submit
                         </h4>
-                        <div class="card-block">
-                            <div id="likes-per-day"></div>
-                        </div>
-                    </div>
+                          <textarea style="background: white" id="textfield2" class="materialize-textarea" ng-model="StatsCtrl.numLikes" disabled></textarea>
+                          <textarea style="background: white" id="textfield2" class="materialize-textarea" ng-model="StatsCtrl.numDislikes" disabled></textarea>
+                          <textarea style="background: white" id="textfield2" class="materialize-textarea" ng-model="StatsCtrl.numReplies" disabled></textarea>
+                         
+
+                        
                 </div>
-                <div class="col-lg-6">
-                    <div class="card shadow">
-                        <h4 class="card-header">Dislikes per day</h4>
-                        <div class="card-block">
-                            <div id="dislikes-per-day"></div>
-                        </div>
-                    </div>
-                </div>
+                
             </div> <!-- row -->
         </div> <!-- container -->
     </body>

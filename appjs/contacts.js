@@ -72,6 +72,7 @@ angular.module('AppChat').controller('ContactsController', ['$http', '$log', '$s
                 function (response) {
                     console.log("User: " + JSON.stringify(response.data));
                     M.toast({html: 'Contact added!', classes: 'rounded green pulse z-depth-3 '});
+                    $route.reload()
                 },
                 function (response) {
                     var status = response.status;
@@ -87,12 +88,13 @@ angular.module('AppChat').controller('ContactsController', ['$http', '$log', '$s
                     else if (status === 404) {
                         M.toast({html: 'Contact not found!', classes: 'rounded red pulse z-depth-3 '});
                     }
+                    else if (status === 500) {
+                        M.toast({html: 'Contact already in your list!', classes: 'rounded red pulse z-depth-3 '});
+                    }
                     else {
                         alert("Internal error.");
                     }
                 });
-            // $route.reload()
-
         };
 
 

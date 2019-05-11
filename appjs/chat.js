@@ -21,10 +21,12 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             file.upload.then(function (response) {
                 $timeout(function () {
                     file.result = response.data;
+                    $route.reload()
                 });
             }, function (response) {
                 if (response.status > 0)
                     $scope.errorMsg = response.status + ': ' + response.data;
+
             }, function (evt) {
                 // Math.min is to fix IE which reports 200% sometimes
                 file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
@@ -92,7 +94,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     // into the list of parts in the controller.
 
                     console.log("response: " + JSON.stringify(response.data));
-
+                    $route.reload()
                 }, // error callback
                 function (response) {
                     var status = response.status;
@@ -137,7 +139,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     // The is the sucess function!
                     // Copy the list of parts in the data variable
                     // into the list of parts in the controller.
-
+                    $route.reload()
                     console.log("response: " + JSON.stringify(response));
 
                 }, // error callback
@@ -226,7 +228,8 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             }).then(
                 function (response) {
                     console.log("User: " + JSON.stringify(response.data));
-
+                    M.toast({html: 'User removed' , classes: 'rounded blue pulse z-depth-3'});
+                    $route.reload()
                 },
                 function (response) {
                     var status = response.status;
@@ -241,8 +244,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                     else if (status === 404) {
                         alert("User not found");
-                        loginCtrl.username = ""
-                        loginCtrl.password = ""
+
                     }
                     else {
                         alert("Internal error.");
@@ -271,7 +273,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             }).then(
                 function (response) {
                     console.log("User: " + JSON.stringify(response.data));
-
+                    $route.reload()
                 },
                 function (response) {
                     var status = response.status;
@@ -293,7 +295,6 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                         alert("Internal error.");
                     }
                 });
-            // $route.reload()
 
         };
 
@@ -316,7 +317,6 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
                     thisCtrl.contactsList = response.data;
                     console.log(thisCtrl.contactsList)
-
                 },
                 function (response) {
                     var status = response.status;
@@ -330,6 +330,8 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                         alert("Not authorized");
                     }
                     else if (status === 404) {
+                    }
+                    else if (status === 777) {
                     }
                     else {
                         alert("Internal error.");
@@ -354,6 +356,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                 function (response) {
                     console.log("User: " + JSON.stringify(response.data));
                     M.toast({html: 'Contact added to group', classes: 'rounded green pulse z-depth-3 '});
+                    $route.reload()
                 },
                 function (response) {
                     var status = response.status;
@@ -370,11 +373,9 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                         alert("User not found");
                     }
                     else {
-                        alert("Internal error.");
+                        M.toast({html: 'User already a memer', classes: 'rounded red pulse z-depth-3 '});
                     }
                 });
-            // $route.reload()
-
         };
 
         this.loadContacts();

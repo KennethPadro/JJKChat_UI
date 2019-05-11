@@ -67,7 +67,7 @@
                         <br>Photo:
                         <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
                         <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
-                        <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+                        <!--<img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>-->
                         <br>
                         <span class="progress" ng-show="picFile.progress >= 0">
                             <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
@@ -110,16 +110,30 @@
                             <span ng-bind="m.dislikes"> </span>
                             <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.viewReacts(m.post_id)">View Reacts</button>
                         </div>
-
-                        <ul class="collection">
-                            <li class="collection-item" ng-repeat="r in m.replies" ><h6>{{r.first_name}} {{r.last_name}}</h6> {{r.reply_message}}  <br> <p class="right-align">{{r.reply_date}}</p></li>
-                        </ul>
-                        <div >
+                        <md-divider></md-divider>
+                        <br>
+                        <div class="col s12 ">
+                            <div class="col s9">
                             <textarea style="background: white" id="textfield2" class="materialize-textarea"ng-model="chatCtrl.newText2"></textarea>
+                            </div>
+                            <div class="col s3">
                             <button class="btn waves-effect cyan " type="submit" name="action" ng-click="chatCtrl.replyToMessage(m.post_id)">Reply
                                 <i class="material-icons right">send</i></button>
+                            </div>
                         </div>
+                        <md-collapsible class="md-accordion">
+                            <md-collapsible-item>
+                                <md-collapsible-header layout="row">
+                                    Click to view Replies
+                                </md-collapsible-header>
+                                <md-collapsible-body>
+                                    <ul class="collection">
+                                        <li class="collection-item" ng-repeat="r in m.replies" ><h6>{{r.first_name}} {{r.last_name}}</h6> {{r.reply_message}}  <br> <p class="right-align">{{r.reply_date}}</p></li>
+                                    </ul>
 
+                                </md-collapsible-body>
+                            </md-collapsible-item>
+                        </md-collapsible>
                     </div>
                 </div>
             </div>
