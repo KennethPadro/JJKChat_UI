@@ -72,6 +72,7 @@ angular.module('AppChat').controller('ContactsController', ['$http', '$log', '$s
                 function (response) {
                     console.log("User: " + JSON.stringify(response.data));
                     M.toast({html: 'Contact added!', classes: 'rounded green pulse z-depth-3 '});
+                    $route.reload()
                 },
                 function (response) {
                     var status = response.status;
@@ -91,8 +92,6 @@ angular.module('AppChat').controller('ContactsController', ['$http', '$log', '$s
                         alert("Internal error.");
                     }
                 });
-            // $route.reload()
-
         };
 
 

@@ -91,7 +91,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
                 function (response) {
                     console.log("User: " + JSON.stringify(response.data));
                     M.toast({html: 'You have created a group, oh almighty being.', classes: 'rounded green pulse z-depth-3 '});
-
+                    $route.reload()
                 },
                 function (response) {
                     var status = response.status;
@@ -110,8 +110,6 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
                         alert("Internal error.");
                     }
                 });
-            // $route.reload()
-
         };
 
         this.deleteGroup = function (chat_group_id) {
@@ -152,8 +150,6 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
                         alert("Internal error.");
                     }
                 });
-            // $route.reload()
-
         };
 
         this.enterGroup = function (gID) {
