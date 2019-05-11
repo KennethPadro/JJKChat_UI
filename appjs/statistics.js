@@ -481,7 +481,7 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
                     console.log("response: " + JSON.stringify(response.data));
 
                     thisCtrl.dislikesData = response.data;
-                    thisCtrl.numDisLikes = "Number of Likes: " + thisCtrl.dislikesData["reactions"];
+                    thisCtrl.numDislikes = "Number of Disikes: " + thisCtrl.dislikesData["reactions"];
 
                 },
                 function (response) {
@@ -517,7 +517,7 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
                     console.log("response: " + JSON.stringify(response.data));
 
                     thisCtrl.repliesData = response.data;
-                    thisCtrl.numReplies = "Number of Likes: " + thisCtrl.repliesData["reactions"];
+                    thisCtrl.numReplies = "Number of Replies: " + thisCtrl.repliesData["total_replies"];
 
                 },
                 function (response) {
