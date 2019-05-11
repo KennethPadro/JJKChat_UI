@@ -373,7 +373,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                         alert("User not found");
                     }
                     else {
-                        alert("Internal error.");
+                        M.toast({html: 'User already a memer', classes: 'rounded red pulse z-depth-3 '});
                     }
                 });
         };
