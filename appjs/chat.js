@@ -331,6 +331,8 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                     }
                     else if (status === 404) {
                     }
+                    else if (status === 777) {
+                    }
                     else {
                         alert("Internal error.");
                     }
