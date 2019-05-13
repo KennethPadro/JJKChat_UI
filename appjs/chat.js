@@ -14,16 +14,20 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         $scope.uploadPic = function(file) {
             file.upload = Upload.upload({
-                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post",
-                data: {user_id: thisCtrl.pID, message: $scope.message, file: file},
+                // url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post",
+                url: "https://api.imgbb.com/1/upload?key=4f0ac9938eef3fe020dea98a2b981625",
+                data: {user_id: thisCtrl.pID, message: $scope.message, image: file},
             });
 
             file.upload.then(function (response) {
                 $timeout(function () {
                     file.result = response.data;
-                    $route.reload()
+                    console.log( file.result)
+
+                    //$route.reload()
                 });
             }, function (response) {
+                console.log("response: " + JSON.stringify(response))
                 if (response.status > 0)
                     $scope.errorMsg = response.status + ': ' + response.data;
 
@@ -31,8 +35,6 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
                 // Math.min is to fix IE which reports 200% sometimes
                 file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
             });
-
-
         };
 
         this.loadMessages = function () {
