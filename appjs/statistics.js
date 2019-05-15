@@ -541,6 +541,75 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
                 });
         };
 
+       
+       this.activeUsersDataPoints = [];
+
+        this.loadactiveUsersPerDay = function() {
+
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/user/mostactive";
+
+            $http.get(url).then(
+                function(response) {
+
+                    console.log("Entre aqui");
+
+                    var data = response.data;
+
+                    console.log("response: " + JSON.stringify(response));
+                    for (var i = 0; i < data.length; i++) {
+                        thisCtrl.activeUsersDataPoints.push({
+                            x: new Date(data[i].date),
+                            y: data[i].user_id
+                        });
+
+                    }
+                    console.log(thisCtrl.activeUsersDataPoints);
+
+                    activeUserschart.render();
+                },
+                function(response) {
+                    var status = response.status;
+                    if (status === 0) {
+                        alert("No internet connection");
+                    } else if (status === 401) {
+                        alert("Your session expired. Login again");
+                    } else if (status === 403) {
+                        alert("Not authorized");
+                    } else if (status === 404) {
+                        alert("Not found");
+                    } else {
+                        alert("Internal error.");
+                    }
+                });
+
+        };
+
+        var activeUserschart = new CanvasJS.Chart("active-user-per-day", {
+            animationEnabled: true,
+            theme: "light2",
+            backgroundColor: "transparent",
+            //title: {
+            //    text: "Post Per Day"
+            //},
+            axisY: {
+                title: "Most active users",
+                titleFontSize: 24
+            },
+            toolTip: {
+                borderThickness: 0,
+                cornerRadius: 0
+            },
+            data: [{
+                type: "spline",
+                yValueFormatString: "###,### posts",
+                dataPoints: this.activeUsersDataPoints
+            }]
+        });
+
+        this.loadactiveUsersPerDay();
+
+
+
 
 
 
