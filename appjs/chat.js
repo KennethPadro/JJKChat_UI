@@ -23,7 +23,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         function secondUpload(data){
             return $http({
-                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post",
+                url: "https://jjkchat-api.herokuapp.com/JJKChat/group/" + thisCtrl.gID + "/post",
                 dataType: 'json',
                 method: 'POST',
                 data: JSON.stringify(data),
