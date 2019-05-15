@@ -12,30 +12,50 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.newText2 ="";
         this.message = "";
 
-        $scope.uploadPic = function(file) {
-            file.upload = Upload.upload({
-                // url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post",
+        function firstUpload(file){
+            return Upload.upload({
+                //url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post",
                 url: "https://api.imgbb.com/1/upload?key=4f0ac9938eef3fe020dea98a2b981625",
                 data: {user_id: thisCtrl.pID, message: $scope.message, image: file},
             });
 
-            file.upload.then(function (response) {
+        }
+
+        function secondUpload(data){
+            return $http({
+                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post",
+                dataType: 'json',
+                method: 'POST',
+                data: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+
+            })
+        }
+
+
+        $scope.uploadPic = function(file) {
+            firstUpload(file)
+                .then(function (response) {
                 $timeout(function () {
                     file.result = response.data;
-                    console.log( file.result)
-
-                    //$route.reload()
+                    // console.log( file.result.data)
+                    var data = {};
+                    data.user_id = thisCtrl.pID;
+                    data.message = $scope.message
+                    data.media = file.result.data
+                    return secondUpload(data)
+                    $route.reload()
                 });
             }, function (response) {
-                console.log("response: " + JSON.stringify(response))
-                if (response.status > 0)
-                    $scope.errorMsg = response.status + ': ' + response.data;
 
             }, function (evt) {
                 // Math.min is to fix IE which reports 200% sometimes
-                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+
             });
         };
+
 
         this.loadMessages = function () {
 
