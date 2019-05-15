@@ -437,7 +437,7 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
 
         
         this.loadLikes = function () {
-            var url = "http://127.0.0.1:5000/JJKChat/post/" + thisCtrl.enteredPID +"/likes/count";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/post/" + thisCtrl.enteredPID +"/likes/count";
 
 
             $http.get(url).then(
@@ -473,7 +473,7 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
 
 
         this.loadDislikes = function () {
-            var url = "http://127.0.0.1:5000/JJKChat/post/" + thisCtrl.enteredPID +"/dislikes/count";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/post/" + thisCtrl.enteredPID +"/dislikes/count";
 
 
             $http.get(url).then(
@@ -509,7 +509,7 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
         thisCtrl.numReplies = "";
 
         this.loadReplies = function () {
-            var url = "http://127.0.0.1:5000/JJKChat/replies/" +thisCtrl.enteredPID +"/count";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/replies/" +thisCtrl.enteredPID +"/count";
 
 
             $http.get(url).then(
