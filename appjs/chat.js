@@ -12,32 +12,54 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.newText2 ="";
         this.message = "";
 
-        $scope.uploadPic = function(file) {
-            file.upload = Upload.upload({
-                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post",
-                data: {user_id: thisCtrl.pID, message: $scope.message, file: file},
+        function firstUpload(file){
+            return Upload.upload({
+                //url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/post",
+                url: "https://api.imgbb.com/1/upload?key=4f0ac9938eef3fe020dea98a2b981625",
+                data: {user_id: thisCtrl.pID, message: $scope.message, image: file},
             });
 
-            file.upload.then(function (response) {
+        }
+
+        function secondUpload(data){
+            return $http({
+                url: "https://jjkchat-api.herokuapp.com/JJKChat/group/" + thisCtrl.gID + "/post",
+                dataType: 'json',
+                method: 'POST',
+                data: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+
+            })
+        }
+
+
+        $scope.uploadPic = function(file) {
+            firstUpload(file)
+                .then(function (response) {
                 $timeout(function () {
                     file.result = response.data;
+                    // console.log( file.result.data)
+                    var data = {};
+                    data.user_id = thisCtrl.pID;
+                    data.message = $scope.message
+                    data.media = file.result.data
+                    return secondUpload(data)
                     $route.reload()
                 });
             }, function (response) {
-                if (response.status > 0)
-                    $scope.errorMsg = response.status + ': ' + response.data;
 
             }, function (evt) {
                 // Math.min is to fix IE which reports 200% sometimes
-                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+
             });
-
-
         };
+
 
         this.loadMessages = function () {
 
-            var url = "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/detailedpost";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/group/" + thisCtrl.gID + "/detailedpost";
 
 
             $http.get(url).then(
@@ -78,7 +100,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             data.post_id = post_id;
             console.log("response: " + JSON.stringify(data));
             $http({
-                url: "http://127.0.0.1:5000/JJKChat/post/" + post_id + "/likes",
+                url: "https://jjkchat-api.herokuapp.com/JJKChat/post/" + post_id + "/likes",
                 dataType: 'json',
                 method: 'POST',
                 data: JSON.stringify(data),
@@ -125,7 +147,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             data.post_id = post_id;
             console.log("response: " + JSON.stringify(data));
             $http({
-                url: "http://127.0.0.1:5000/JJKChat/post/" + post_id + "/dislikes",
+                url: "https://jjkchat-api.herokuapp.com/JJKChat/post/" + post_id + "/dislikes",
                 dataType: 'json',
                 method: 'POST',
                 data: JSON.stringify(data),
@@ -175,7 +197,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         ///Added by Jesi
         this.viewMembers = function(){
-            var url = "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/members";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/group/" + thisCtrl.gID + "/members";
 
 
             // Now set up the $http object
@@ -218,7 +240,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             post.user_id = user_id;
             console.log("User: " + JSON.stringify(user_id));
             $http({
-                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/members",
+                url: "https://jjkchat-api.herokuapp.com/JJKChat/group/" + thisCtrl.gID + "/members",
                 dataType: 'json',
                 method: 'DELETE',
                 data: post,
@@ -263,7 +285,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             post.user_id = thisCtrl.pID;
             post.reply_message = thisCtrl.newText2;
             $http({
-                url: "http://127.0.0.1:5000/JJKChat/post/" + post_id + "/replies",
+                url: "https://jjkchat-api.herokuapp.com/JJKChat/post/" + post_id + "/replies",
                 dataType: 'json',
                 method: 'POST',
                 data: post,
@@ -306,7 +328,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
 
         this.loadContacts = function () {
 
-            var url = "http://127.0.0.1:5000/JJKChat/user/" + thisCtrl.pID + "/contact";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/user/" + thisCtrl.pID + "/contact";
 
 
             $http.get(url).then(
@@ -345,7 +367,7 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             post.user_id = user_id;
             console.log("User: " + JSON.stringify(user_id));
             $http({
-                url: "http://127.0.0.1:5000/JJKChat/group/" + thisCtrl.gID + "/members",
+                url: "https://jjkchat-api.herokuapp.com/JJKChat/group/" + thisCtrl.gID + "/members",
                 dataType: 'json',
                 method: 'POST',
                 data: post,

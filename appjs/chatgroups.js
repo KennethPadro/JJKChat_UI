@@ -9,7 +9,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
 
         this.loadGroups = function () {
 
-            var url = "http://127.0.0.1:5000/JJKChat/user/"+ thisCtrl.pID + "/member";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/user/"+ thisCtrl.pID + "/member";
 
             $http.get(url).then(
                 function (response) {
@@ -42,7 +42,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
 
         this.loadGroups2 = function () {
 
-            var url = "http://127.0.0.1:5000/JJKChat/user/"+ thisCtrl.pID +"/ownedgroups";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/user/"+ thisCtrl.pID +"/ownedgroups";
             $http.get(url).then(
                 function (response) {
                     console.log("response: " + JSON.stringify(response));
@@ -80,7 +80,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
             post.user_id = thisCtrl.pID;
 
             $http({
-                url: 'http://127.0.0.1:5000/JJKChat/group',
+                url: 'https://jjkchat-api.herokuapp.com/JJKChat/group',
                 dataType: 'json',
                 method: 'POST',
                 data: post,
@@ -118,7 +118,7 @@ angular.module('AppChat').controller('ChatGroupsController', ['$http', '$log', '
             post.user_id = thisCtrl.pID;
 
             $http({
-                url: 'http://127.0.0.1:5000/JJKChat/group',
+                url: 'https://jjkchat-api.herokuapp.com/JJKChat/group',
                 dataType: 'json',
                 method: 'DELETE',
                 data: post,

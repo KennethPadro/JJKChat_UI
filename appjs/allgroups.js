@@ -8,7 +8,7 @@ angular.module('AppChat').controller('AllChatGroupsController', ['$http', '$log'
 
         this.loadGroups = function () {
 
-            var url = "http://127.0.0.1:5000/JJKChat/group";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/group";
 
             $http.get(url).then(
                 function (response) {
@@ -43,7 +43,7 @@ angular.module('AppChat').controller('AllChatGroupsController', ['$http', '$log'
         };
 
         this.join = function (gID) {
-            var url = "http://127.0.0.1:5000/JJKChat/ChatApp/group/" + gID + "/person/" + thisCtrl.pID;
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/ChatApp/group/" + gID + "/person/" + thisCtrl.pID;
 
 
             $http.post(url).then(// success call back

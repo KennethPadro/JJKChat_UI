@@ -9,7 +9,7 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
 
         this.loadPostPerDay = function() {
 
-            var url = "http://127.0.0.1:5000/JJKChat/post/countperday";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/post/countperday";
 
             $http.get(url).then(
                 function(response) {
@@ -76,7 +76,7 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
 
         this.loadRepliesPerDay = function() {
 
-            var url = "http://127.0.0.1:5000/JJKChat/replies/count";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/replies/count";
 
             $http.get(url).then(
                 function(response) {
@@ -143,7 +143,7 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
 
         this.loadLikesPerDay = function() {
 
-            var url = "http://127.0.0.1:5000/JJKChat/likes/count";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/likes/count";
 
             $http.get(url).then(
                 function(response) {
@@ -209,7 +209,7 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
 
         this.loadDislikesPerDay = function() {
 
-            var url = "http://127.0.0.1:5000/JJKChat/dislikes/count";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/dislikes/count";
 
             $http.get(url).then(
                 function(response) {
@@ -279,7 +279,7 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
 
         this.loadPostPerDayByUser = function() {
 
-            var url = "http://127.0.0.1:5000/JJKChat/user/"+thisCtrl.enteredUID+"/postsperday";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/user/"+thisCtrl.enteredUID+"/postsperday";
 
             $http.get(url).then(
                 function(response) {
@@ -386,7 +386,7 @@ angular.module('AppChat').controller('StatisticsController', ['$http', '$log', '
         
         this.loadTrendingTopics = function () {
             console.log("Entered on Trending Topics");
-            var url = "http://127.0.0.1:5000/JJKChat/hashtag/trending";
+            var url = "https://jjkchat-api.herokuapp.com/JJKChat/hashtag/trending";
 
 
             $http.get(url).then(
