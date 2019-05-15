@@ -134,6 +134,16 @@
             <div class="row m-b-1">
                 <div class="col-lx-12">
                     <div class="card shadow">
+                        <h4 class="card-header">Most active user per day</h4>
+                        <div class="card-block">
+                            <div id="active-user-per-day"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-b-1">
+                <div class="col-lx-12">
+                    <div class="card shadow">
                         <h4 class="card-header">Post per day by user
                         <textarea style="background: white" id="textfield2" class="materialize-textarea" ng-model="StatsCtrl.enteredUID"></textarea>
                         <button class="btn waves-effect cyan " type="submit" name="action" ng-click="StatsCtrl.loadPostPerDayByUser()">Submit
